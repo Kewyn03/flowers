@@ -14,7 +14,7 @@ export default createGlobalStyle`
     width: 100%;
     color: #ffffff;
     max-width: 1920px;
-    
+   
     margin: 0 auto;
     padding: 0;
   }
@@ -33,3 +33,7 @@ export default createGlobalStyle`
     font-weight: 300;
   }
   `
+
+const theme = {
+
+}
