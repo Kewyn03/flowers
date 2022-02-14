@@ -10,30 +10,28 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+
   body {
-    width: 100%;
-    color: #ffffff;
+    width: 100vw;
     max-width: 1920px;
-   
+    overflow-x: hidden;
     margin: 0 auto;
     padding: 0;
   }
-  
-  ul,li {
+
+  ul, li {
     list-style: none;
   }
 
   @font-face {
     font-family: "MuseoSansCyrl100";
-    src: url("/fonts/MuseoSansCyrl-100.eot");
-    src: url("/fonts/MuseoSansCyrl-100.eot?#iefix")format("embedded-opentype"),
-    url("/fonts/MuseoSansCyrl-100.woff") format("woff"),
-    url("/fonts/MuseoSansCyrl-100.ttf") format("truetype");
+    src: url("/src/assets/fonts/MuseoSansCyrl-100.eot");
+    src: url("/src/assets/fonts/MuseoSansCyrl-100.eot?#iefix") format("embedded-opentype"),
+    url("/src/assets/fonts/MuseoSansCyrl-100.woff") format("woff"),
+    url("/src/assets/fonts/MuseoSansCyrl-100.ttf") format("truetype");
     font-style: normal;
     font-weight: 300;
   }
-  `
 
-const theme = {
+`
 
-}

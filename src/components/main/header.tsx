@@ -1,6 +1,22 @@
 import React from 'react';
-import styled, {css, keyframes} from "styled-components";
+import styled, {css} from "styled-components";
 
+import ShippingIcon from '../../assets/images/shipping.svg'
+import ContactsIcon from '../../assets/images/contacts.svg'
+import BookmarksIcon from '../../assets/images/like.svg'
+import LoginIcon from '../../assets/images/user-logo.svg'
+import LogoIcon from '../../assets/images/logo.png'
+import ViberIcon from '../../assets/images/viber.svg'
+import InstIcon from '../../assets/images/instagram.svg'
+import TgIcon from '../../assets/images/telegram.svg'
+import FbIcon from '../../assets/images/facebook.svg'
+import SearchIconRC from '../../assets/images/search.svg'
+import ShipcartIcon from '../../assets/images/shoppingcart.svg'
+
+
+import {ReactComponent as ArrowDownRC} from "../../assets/images/arrowdown.svg";
+import {ReactComponent as ArrowCategoryRC} from "../../assets/images/arrowdown.svg";
+import {ReactComponent as DdarrowRC} from "../../assets/images/ddarrow.svg";
 
 const fontNavStyles = css`
   font-family: Museo Sans Cyrl, sans-serif;
@@ -11,20 +27,13 @@ const fontNavStyles = css`
   color: #FFFFFF;
 `
 
-// const rotate = keyframes `
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   50% {
-//     transform: rotate(180deg);
-//   }
-//   to {
-//     transform: rotate(0deg);
-//   }
-// `
 
-const Hheader = styled.header`
+const NavPanel = styled.header`
   flex-wrap: wrap;
+`
+
+const CategoryPanel = styled.div`
+
 `
 
 const TopHeader = styled.div`
@@ -43,7 +52,7 @@ const NavTopHeader = styled.div`
   display: flex;
   flex-direction: row;
   height: 50px;
-  margin: 0 160px;
+  margin: 0 250px;
   @media (max-width: 1500px) {
     width: 1480px;
     margin: 0 2%;
@@ -56,7 +65,7 @@ const NavText = styled.li`
   ${fontNavStyles};
   margin-right: 6%;
   cursor: pointer;
-
+  position: relative;
   &:nth-child(4) {
     //margin-right: 5%;
   }
@@ -67,10 +76,10 @@ const NavText = styled.li`
   }
 
   &:nth-child(6) {
-    margin-right: 18.9%;
+    margin-right: 14%;
 
     @media (max-width: 1500px) {
-      margin-right: 16%;
+      margin-right: 18%;
     }
   }
 
@@ -103,25 +112,28 @@ const DropDownItem = styled.span`
   color: #956D84;
 `
 
-const ArrowDown = styled.img`
-  position: relative;
+const ArrowDown = styled(ArrowDownRC).attrs({
+    alt : 'arrow'
+
+})`
+  position:absolute;
+  right: -25px;
   align-self: center;
-  width: 7px;
-  height: 4px;
+  fill: #FFFFFF;
 `
 
 const MainHeader = styled.div`
   display: flex;
   //flex-direction: row;
   height: 200px;
-  margin: 0 160px;
+  margin: 0 250px;
   @media (max-width: 1650px) {
     margin-right: 3%;
   }
   @media (max-width: 1500px) {
     margin: 0 -5% 0 1%;
   }
-  @media (max-width: 1400px) {
+  @media (${props => props.theme.largeDesktops}) {
     margin: 0 -8% 0 1%;
   }
   //align-items: center;
@@ -138,7 +150,7 @@ const LogoImage = styled.img`
 
 
 const SearchGroup = styled.div`
-  
+
   width: 1200px;
 
 `
@@ -147,7 +159,7 @@ const SearchGroup = styled.div`
 const InputCategories = styled.input.attrs({
     type: 'input'
 })`
-  
+
   height: 18px;
   width: 250px;
   margin-right: 2%;
@@ -186,7 +198,7 @@ const InputSearch = styled.input.attrs({
   @media (max-width: 1600px) {
     width: 540px;
   }
-  
+
 
   ::placeholder {
     color: #828282;
@@ -196,16 +208,18 @@ const InputSearch = styled.input.attrs({
 const InputContainer = styled.span`
 
   position: relative;
-  &:first-child img{
-    position: absolute;
-    top: 7px;
-    padding: 0;
+
+  &:first-child img {
     
+    top: 7px;
+    left: 3px;
+    padding: 0;
+
   }
-  
-  &:nth-child(2) img{
+
+  &:nth-child(2) img {
     position: absolute;
-    top: 6px;
+    top: 10px;
     right: 15px;
   }
 `
@@ -216,12 +230,14 @@ const SocialGroupIcons = styled.div`
 `
 
 const SocialIcon = styled.img`
-  margin-right: 5%;
+
   width: 30px;
   height: 30px;
   padding: 2px;
   background: #956D84;
   border-radius: 50%;
+  float: left;
+  margin: 2.5%;
   cursor: pointer;
 
   &:hover {
@@ -298,10 +314,13 @@ const NavMainText = styled.div`
   margin-right: 6.5%;
 
   &:first-child {
-
+    position: relative;
+    
+    
     &:hover Ul {
       display: block;
       visibility: visible;
+      background-color: #FFFFFF;
 
     }
 
@@ -331,7 +350,7 @@ const NavMainText = styled.div`
     Ul Li:hover img {
       stroke: #FFFFFF;
       transform: rotate(180deg);
-      transition: .5s ease;
+
     }
 
 
@@ -343,18 +362,22 @@ const NavMainText = styled.div`
     width: 160px;
     color: #956D84;
   }
-
+  
+  
   &:nth-child(6) {
+    position: relative;
 
     &:hover Ul {
+      height: 200px;
       display: block;
       visibility: visible;
+      background-color: #FFFFFF;
     }
 
 
     &:hover > img {
       transform: rotate(180deg);
-      transition: .5s ease-in-out;
+      transition: .5s ease;
     }
 
     width: 120px;
@@ -401,7 +424,7 @@ const CartInfoImg = styled.img`
 const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
-  
+
   vertical-align: middle;
 `
 
@@ -412,139 +435,146 @@ const MoneyValue = styled.span`
   color: #828282;
 `
 
-const ArrowCategory = styled.img`
-  padding: 1% 2%;
+const ArrowCategory = styled(ArrowCategoryRC)`
+  position: absolute;
+  transition: all .5s ease-in-out;
   flex-wrap: wrap;
   color: #000000;
+  top: 6px;
+ 
 
 `
 
 
-const Ddarrow = styled.img`
+const Ddarrow = styled(DdarrowRC)`
   display: inline;
   float: right;
   stroke: #000000;
   stroke-width: 1.2;
+  transition: all .5s ease-in-out;
 `
 
 const Header = ({...props}) => {
 
 
     return (
-        <Hheader>
-            <TopHeader>
-                <NavTopHeader>
-                    <NavText>Валюта
-                        <DropDownItem>Грн</DropDownItem>
-                        <ArrowDown src={'/images/arrow-down.png'} alt='arrow-down'/>
-                    </NavText>
-                    <NavText>Язык
-                        <DropDownItem>RU</DropDownItem>
-                        <ArrowDown src={'/images/arrow-down.png'} alt='arrow-down'/>
-                    </NavText>
-                    <NavText>Город
-                        <DropDownItem>Киев</DropDownItem>
-                        <ArrowDown src={'/images/arrow-down.png'} alt='arrow-down'/>
-                    </NavText>
-                    <NavText>
-                        <NavImages src={'/images/like.svg'} alt='like'/>
-                        Закладки
-                    </NavText>
-                    <NavText>
-                        <NavImages src={'/images/shipping.svg'} alt='shipping'/>
-                        Доставка и оплата
-                    </NavText>
-                    <NavText>
-                        <NavImages src={'/images/contacts.svg'} alt='contacts'/>
-                        Контакты
-                    </NavText>
-                    <NavText>
-                        <NavImages src={'/images/user-logo.svg'} alt='user-logo'/>
-                        Вход
-                    </NavText>
-                    <NavText>Регистрация</NavText>
-                </NavTopHeader>
-            </TopHeader>
-            <MainHeader>
-                <LogoImage src={'/images/logo.png'} alt='logo'/>
-                <NavContainer>
-                    <SearchGroup>
-                        <InputContainer>
-                            <ArrowCategory src={'/images/arrowdown.svg'} alt='arrow'/>
-                            <InputCategories type='input' placeholder='Поиск по категориям'/>
-                        </InputContainer>
-                        <InputContainer>
-                            <InputSearch placeholder='Поиск по товарам'/>
-                            <SearchIcon src={'/images/search.svg'} alt='search'/>
-                        </InputContainer>
-
-                    </SearchGroup>
-                    <NavMainHeader>
-                        <NavMainText>
-                            Каталог товаров
-                            <ArrowCategory src={'/images/arrowdown.svg'} alt='arrow'/>
-                            <Ul>
-                                <Li>Букеты<Ddarrow src={'/images/ddarrow.svg'} alt='arrow'/>
-                                    <Ul>
-                                        <Li>Букет из роз</Li>
-                                        <Li>Букет из хризантем</Li>
-                                        <Li>Букет из альтромерии</Li>
-                                        <Li>Букет из гербер</Li>
-                                        <Li>Букет из ирисов</Li>
-                                        <Li>Букет из пионов</Li>
-                                    </Ul>
-                                </Li>
-                                <Li>Розы<Ddarrow src={'/images/ddarrow.svg'} alt='arrow'/></Li>
-                                <Li>Цветы в коробке<Ddarrow src={'/images/ddarrow.svg'} alt='arrow'/></Li>
-                                <Li>Композиции<Ddarrow src={'/images/ddarrow.svg'} alt='arrow'/></Li>
-                                <Li>Подарки<Ddarrow src={'/images/ddarrow.svg'} alt='arrow'/></Li>
-                                <Li>Подарочные корзины<Ddarrow src={'/images/ddarrow.svg'} alt='arrow'/></Li>
-                                <Li>Букеты невесты<Ddarrow src={'/images/ddarrow.svg'} alt='arrow'/></Li>
-                                <Li>Вкусные букеты<Ddarrow src={'/images/ddarrow.svg'} alt='arrow'/></Li>
-                            </Ul>
-                        </NavMainText>
-                        <NavMainText>
-                            Форум
-                        </NavMainText>
-                        <NavMainText>
-                            Отзывы
-                        </NavMainText>
-                        <NavMainText>
-                            Акции
-                        </NavMainText>
-                        <NavMainText>
-                            Новости
-                        </NavMainText>
-                        <NavMainText>
-                            Информация
-                            <ArrowCategory src={'/images/arrowdown.svg'} alt='arrow'/>
-                            <Ul>
-                                <Li>abcfsaff</Li>
-                                <Li>abcasdasd</Li>
-                                <Li>abcasdasd</Li>
-                                <Li>abcasdasd</Li>
-                            </Ul>
-                        </NavMainText>
-                    </NavMainHeader>
-                </NavContainer>
-                <SocialContainer>
-                    <SocialGroupIcons>
-                        <SocialIcon src={'/images/viber.svg'} alt='viber-logo'/>
-                        <SocialIcon src={'/images/instagram.svg'} alt='inst-logo'/>
-                        <SocialIcon src={'/images/telegram.svg'} alt='tg-logo'/>
-                        <SocialIcon src={'/images/facebook.svg'} alt='fb-logo'/>
-                    </SocialGroupIcons>
-                    <NumberText>
-                        +47 (047) 747 47 47
-                    </NumberText>
-                    <CartInfoIcons>
-                        <CartInfoImg src={'/images/like.svg'} alt='like'/>
-                        <CartInfoImg src={'/images/shoppingcart.svg'} alt='shipcart'/>
-                        <MoneyValue>$ 1 234</MoneyValue>
-                    </CartInfoIcons>
-                </SocialContainer>
-            </MainHeader>
-        </Hheader>
+        <>
+            <NavPanel>
+                <TopHeader>
+                    <NavTopHeader>
+                        <NavText>Валюта
+                            <DropDownItem>Грн</DropDownItem>
+                            <ArrowDown />
+                        </NavText>
+                        <NavText>Язык
+                            <DropDownItem>RU</DropDownItem>
+                            <ArrowDown />
+                        </NavText>
+                        <NavText>Город
+                            <DropDownItem>Киев</DropDownItem>
+                            <ArrowDown />
+                        </NavText>
+                        <NavText>
+                            <NavImages src={BookmarksIcon} alt='bookmarks'/>
+                            Закладки
+                        </NavText>
+                        <NavText>
+                            <NavImages src={ShippingIcon} alt='shipping'/>
+                            Доставка и оплата
+                        </NavText>
+                        <NavText>
+                            <NavImages src={ContactsIcon} alt='contacts'/>
+                            Контакты
+                        </NavText>
+                        <NavText>
+                            <NavImages src={LoginIcon} alt='user-logo'/>
+                            Вход
+                        </NavText>
+                        <NavText>Регистрация</NavText>
+                    </NavTopHeader>
+                </TopHeader>
+            </NavPanel>
+            <CategoryPanel>
+                <MainHeader>
+                    <LogoImage src={LogoIcon} alt='logo'/>
+                    <NavContainer>
+                        <SearchGroup>
+                            <InputContainer>
+                                <ArrowCategory />
+                                <InputCategories type='input' placeholder='Поиск по категориям'/>
+                            </InputContainer>
+                            <InputContainer>
+                                <InputSearch placeholder='Поиск по товарам'/>
+                                <SearchIcon src={SearchIconRC} alt='search'/>
+                            </InputContainer>
+                        </SearchGroup>
+                        <NavMainHeader>
+                            <NavMainText>
+                                Каталог товаров
+                                <ArrowCategory />
+                                <Ul>
+                                    <Li>Букеты<Ddarrow />
+                                        <Ul>
+                                            <Li>Букет из роз</Li>
+                                            <Li>Букет из хризантем</Li>
+                                            <Li>Букет из альтромерии</Li>
+                                            <Li>Букет из гербер</Li>
+                                            <Li>Букет из ирисов</Li>
+                                            <Li>Букет из пионов</Li>
+                                        </Ul>
+                                    </Li>
+                                    <Li>Розы<Ddarrow  /></Li>
+                                    <Li>Цветы в коробке<Ddarrow/></Li>
+                                    <Li>Композиции<Ddarrow  /></Li>
+                                    <Li>Подарки<Ddarrow /></Li>
+                                    <Li>Подарочные корзины<Ddarrow  /></Li>
+                                    <Li>Букеты невесты<Ddarrow  /></Li>
+                                    <Li>Вкусные букеты<Ddarrow /></Li>
+                                </Ul>
+                            </NavMainText>
+                            <NavMainText>
+                                Форум
+                            </NavMainText>
+                            <NavMainText>
+                                Отзывы
+                            </NavMainText>
+                            <NavMainText>
+                                Акции
+                            </NavMainText>
+                            <NavMainText>
+                                Новости
+                            </NavMainText>
+                            <NavMainText>
+                                Информация
+                                <ArrowCategory />
+                                <Ul>
+                                    <Li>abcfsaff</Li>
+                                    <Li>abcasdasd</Li>
+                                    <Li>abcasdasd</Li>
+                                    <Li>abcasdasd</Li>
+                                </Ul>
+                            </NavMainText>
+                        </NavMainHeader>
+                    </NavContainer>
+                    <SocialContainer>
+                        <SocialGroupIcons>
+                            <SocialIcon src={ViberIcon} alt='viber-logo'/>
+                            <SocialIcon src={InstIcon} alt='inst-logo'/>
+                            <SocialIcon src={TgIcon} alt='tg-logo'/>
+                            <SocialIcon src={FbIcon} alt='fb-logo'/>
+                        </SocialGroupIcons>
+                        <NumberText>
+                            +47 (047) 747 47 47
+                        </NumberText>
+                        <CartInfoIcons>
+                            <CartInfoImg src={BookmarksIcon} alt='like'/>
+                            <CartInfoImg src={ShipcartIcon} alt='shipcart'/>
+                            <MoneyValue>$ 1 234</MoneyValue>
+                        </CartInfoIcons>
+                    </SocialContainer>
+                </MainHeader>
+            </CategoryPanel>
+        </>
     );
 };
 
