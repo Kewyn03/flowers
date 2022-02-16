@@ -24,11 +24,12 @@ const fontNavStyles = css`
   font-style: normal;
   line-height: 18px;
   letter-spacing: .3px;
-  color: #FFFFFF;
+  
 `
 
 
 const NavPanel = styled.header`
+  
   flex-wrap: wrap;
 `
 
@@ -66,6 +67,7 @@ const NavText = styled.li`
   margin-right: 6%;
   cursor: pointer;
   position: relative;
+  color: #FFFFFF;
   &:nth-child(4) {
     //margin-right: 5%;
   }
@@ -113,10 +115,10 @@ const DropDownItem = styled.span`
 `
 
 const ArrowDown = styled(ArrowDownRC).attrs({
-    alt : 'arrow'
+    alt: 'arrow'
 
 })`
-  position:absolute;
+  position: absolute;
   right: -25px;
   align-self: center;
   fill: #FFFFFF;
@@ -145,6 +147,7 @@ const LogoImage = styled.img`
   max-width: 200px;
   width: 120px;
   height: 120px;
+  cursor: pointer;
 
 `
 
@@ -159,16 +162,12 @@ const SearchGroup = styled.div`
 const InputCategories = styled.input.attrs({
     type: 'input'
 })`
-
+  ${fontNavStyles};
   height: 18px;
   width: 250px;
   margin-right: 2%;
   padding: 2%;
-  font-family: Museo Sans Cyrl, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  line-height: 18px;
-  font-weight: 300;
+ 
   color: #828282;
   border: none;
   border-bottom: 1px solid #956D84;
@@ -186,10 +185,7 @@ const InputSearch = styled.input.attrs({
   height: 18px;
   width: 620px;
   padding: 2% 2% 2% 0;
-  font-family: Museo Sans Cyrl, sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  line-height: 18px;
+  ${fontNavStyles};
   color: #828282;
   border: none;
   border-bottom: 1px solid #956D84;
@@ -210,7 +206,7 @@ const InputContainer = styled.span`
   position: relative;
 
   &:first-child img {
-    
+
     top: 7px;
     left: 3px;
     padding: 0;
@@ -272,6 +268,7 @@ const NavMainHeader = styled.div`
 
 `
 
+
 const Ul = styled.ul`
 
   height: 335px;
@@ -304,19 +301,17 @@ const Li = styled.li`
 `
 
 const NavMainText = styled.div`
-  font-family: Museo Sans Cyrl, sans-serif;
-  font-size: 16px;
-  font-style: normal;
+  ${fontNavStyles};
   font-weight: 700;
-  line-height: 18px;
   color: #333333;
   cursor: pointer;
-  margin-right: 6.5%;
+  margin-right: 77px;
+  margin-top: 12px;
 
   &:first-child {
     position: relative;
-    
-    
+
+
     &:hover Ul {
       display: block;
       visibility: visible;
@@ -325,7 +320,7 @@ const NavMainText = styled.div`
     }
 
 
-    &:hover > img {
+    &:hover > svg {
       transform: rotate(180deg);
       transition: all .5s ease-in-out;
       // animation: rotate .5s;
@@ -347,35 +342,38 @@ const NavMainText = styled.div`
       border: 1px solid #956D84;
     }
 
-    Ul Li:hover img {
+    Ul Li:hover svg {
       stroke: #FFFFFF;
       transform: rotate(180deg);
+      
 
     }
-
+    
 
     Ul Li:hover {
-      padding-left: 10%;
-      transition: .5s;
+      padding-left: 30px;
+      transition: 1.5s;
     }
 
     width: 160px;
     color: #956D84;
   }
-  
-  
+
+
   &:nth-child(6) {
     position: relative;
+    z-index: 1;
 
     &:hover Ul {
-      height: 200px;
+
+      height: 169px;
       display: block;
       visibility: visible;
       background-color: #FFFFFF;
     }
 
 
-    &:hover > img {
+    &:hover > svg {
       transform: rotate(180deg);
       transition: .5s ease;
     }
@@ -397,11 +395,8 @@ const SocialContainer = styled.div`
 
 const NumberText = styled.span`
 
-  font-family: Museo Sans Cyrl, sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 18px;
+  ${fontNavStyles};
+  letter-spacing: 0;
   color: #333333;
   cursor: pointer;
 `
@@ -418,13 +413,13 @@ const CartInfoImg = styled.img`
   height: 40px;
   stroke-width: 10%;
   margin-right: 5%;
+  cursor: pointer;
 
 `
 
 const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
-
   vertical-align: middle;
 `
 
@@ -441,8 +436,6 @@ const ArrowCategory = styled(ArrowCategoryRC)`
   flex-wrap: wrap;
   color: #000000;
   top: 6px;
- 
-
 `
 
 
@@ -464,15 +457,15 @@ const Header = ({...props}) => {
                     <NavTopHeader>
                         <NavText>Валюта
                             <DropDownItem>Грн</DropDownItem>
-                            <ArrowDown />
+                            <ArrowDown/>
                         </NavText>
                         <NavText>Язык
                             <DropDownItem>RU</DropDownItem>
-                            <ArrowDown />
+                            <ArrowDown/>
                         </NavText>
                         <NavText>Город
                             <DropDownItem>Киев</DropDownItem>
-                            <ArrowDown />
+                            <ArrowDown/>
                         </NavText>
                         <NavText>
                             <NavImages src={BookmarksIcon} alt='bookmarks'/>
@@ -500,7 +493,7 @@ const Header = ({...props}) => {
                     <NavContainer>
                         <SearchGroup>
                             <InputContainer>
-                                <ArrowCategory />
+                                <ArrowCategory/>
                                 <InputCategories type='input' placeholder='Поиск по категориям'/>
                             </InputContainer>
                             <InputContainer>
@@ -511,9 +504,9 @@ const Header = ({...props}) => {
                         <NavMainHeader>
                             <NavMainText>
                                 Каталог товаров
-                                <ArrowCategory />
+                                <ArrowCategory/>
                                 <Ul>
-                                    <Li>Букеты<Ddarrow />
+                                    <Li>Букеты<Ddarrow/>
                                         <Ul>
                                             <Li>Букет из роз</Li>
                                             <Li>Букет из хризантем</Li>
@@ -523,13 +516,13 @@ const Header = ({...props}) => {
                                             <Li>Букет из пионов</Li>
                                         </Ul>
                                     </Li>
-                                    <Li>Розы<Ddarrow  /></Li>
+                                    <Li>Розы<Ddarrow/></Li>
                                     <Li>Цветы в коробке<Ddarrow/></Li>
-                                    <Li>Композиции<Ddarrow  /></Li>
-                                    <Li>Подарки<Ddarrow /></Li>
-                                    <Li>Подарочные корзины<Ddarrow  /></Li>
-                                    <Li>Букеты невесты<Ddarrow  /></Li>
-                                    <Li>Вкусные букеты<Ddarrow /></Li>
+                                    <Li>Композиции<Ddarrow/></Li>
+                                    <Li>Подарки<Ddarrow/></Li>
+                                    <Li>Подарочные корзины<Ddarrow/></Li>
+                                    <Li>Букеты невесты<Ddarrow/></Li>
+                                    <Li>Вкусные букеты<Ddarrow/></Li>
                                 </Ul>
                             </NavMainText>
                             <NavMainText>
@@ -546,12 +539,12 @@ const Header = ({...props}) => {
                             </NavMainText>
                             <NavMainText>
                                 Информация
-                                <ArrowCategory />
+                                <ArrowCategory/>
                                 <Ul>
-                                    <Li>abcfsaff</Li>
-                                    <Li>abcasdasd</Li>
-                                    <Li>abcasdasd</Li>
-                                    <Li>abcasdasd</Li>
+                                    <Li>О нас</Li>
+                                    <Li>Оплата и доставка</Li>
+                                    <Li>Доставка цветов в офис</Li>
+                                    <Li>Контакты</Li>
                                 </Ul>
                             </NavMainText>
                         </NavMainHeader>

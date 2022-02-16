@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
+
 export default createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -32,6 +33,8 @@ export default createGlobalStyle`
     font-style: normal;
     font-weight: 300;
   }
+  
+  
 
 `
 
