@@ -46,6 +46,8 @@ const CardComponent = styled.div`
   &:hover {
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.5);
   }
+  
+  
 `
 
 const Flower = styled.img`
@@ -111,7 +113,7 @@ const TopCircleText = styled.span`
 `
 
 const BottomContainer = styled.div`
-
+ 
 `
 
 const ButtonOrder = styled.div`
@@ -123,23 +125,27 @@ const ButtonOrder = styled.div`
   background-color: #956D84;
   left: 60px;
   top: 20px;
- 
+  transition: .5s;
   
   &:hover {
-    
-    box-shadow:1px 5px 5px rgba(0, 0, 0, 0.5);
-   
+    opacity: 0.9;
     cursor: pointer;
+  }
+  
+  &:active {
+    opacity: 0.6;
   }
 `
 
 const ButtonFastOrder = styled.span`
   position: absolute;
   bottom: 5px;
-  left: 125px;
+  left: 120px;
   text-decoration-line: underline;
   color: #828282;
   ${CircleStyle};
+  cursor: pointer;
+  
 `
 
 const ButtonText = styled.span`
@@ -148,6 +154,7 @@ const ButtonText = styled.span`
   ${TitleStyle};
   left: 75px;
   top: 23px;
+  
 
 `
 

@@ -268,7 +268,6 @@ const NavMainHeader = styled.div`
 
 `
 
-
 const Ul = styled.ul`
 
   height: 335px;
@@ -276,7 +275,6 @@ const Ul = styled.ul`
   color: #000000;
   padding: 0;
   border: 1px solid #956D84;
-
   display: none;
   visibility: hidden;
 
@@ -345,11 +343,8 @@ const NavMainText = styled.div`
     Ul Li:hover svg {
       stroke: #FFFFFF;
       transform: rotate(180deg);
-      
-
     }
     
-
     Ul Li:hover {
       padding-left: 30px;
       transition: 1.5s;

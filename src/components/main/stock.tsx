@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 
 import {ReactComponent as SliderArrowRC} from '../../assets/images/arrowSlider.svg'
 import Card from "./card";
@@ -27,6 +27,13 @@ const SliderGroup = styled.span `
 `
 
 const SliderArrow = styled(SliderArrowRC)`
+  cursor: pointer;
+  transition: .5s;
+  &:hover {
+    opacity: 0.7;
+    
+  }
+  
   &:nth-child(1) {
     margin-right: 20px;
   }

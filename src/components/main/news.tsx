@@ -82,14 +82,14 @@ const Text = styled.span `
   float: right;
 `
 
-const TextMini = styled.span `
-  font-family: Museo Sans Cyrl,sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 18px;
-  width: 300px;
-`
+// const TextMini = styled.span `
+//   font-family: Museo Sans Cyrl,sans-serif;
+//   font-style: normal;
+//   font-weight: 300;
+//   font-size: 14px;
+//   line-height: 18px;
+//   width: 300px;
+// `
 
 const White = styled.span`
   word-wrap: normal;
@@ -270,7 +270,7 @@ const News = () => {
                 </Rectangle>
                 <Rectangle>
                     <Text>Подарок<br/> каждому клиенту</Text>
-                    <TextMini>К каждому заказу мы прилогаем <br/> комплимент от компании <br/> в виде маленького презента</TextMini>
+                    {/*<TextMini>К каждому заказу мы прилогаем <br/> комплимент от компании <br/> в виде маленького презента</TextMini>*/}
                     <Matrix>
                         <PresentClients/>
                     </Matrix>
