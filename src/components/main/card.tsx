@@ -192,7 +192,7 @@ const OldPrice = styled.span`
   margin-right: 5px;
 `
 
-const Card = () => {
+const Card: React.FC = () => {
     return (
         <Container>
             {flowers.roses.map(item => (

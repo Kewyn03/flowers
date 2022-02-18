@@ -234,7 +234,7 @@ const FlowersBox = styled(FlowersInBoxRC) `
 `
 
 
-const News = () => {
+const News: React.FC = () => {
     return (
         <>
             <Container>

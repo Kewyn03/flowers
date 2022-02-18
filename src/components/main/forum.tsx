@@ -113,7 +113,7 @@ const RectangleMiniText = styled.span `
   left: 23px;
 `
 
-const Forum = () => {
+const Forum: React.FC = () => {
     return (
         <ForumContainer>
             <TextContainer>

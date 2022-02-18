@@ -44,7 +44,7 @@ const SliderArrow = styled(SliderArrowRC)`
 
 `
 
-const Stock = () => {
+const Stock: React.FC = () => {
     return (
         <>
             <Headlines>
