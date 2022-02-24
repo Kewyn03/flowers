@@ -22,7 +22,7 @@ const Container = styled.div`
 
 const ContainerImg = styled.div`
   display: flex;
-  height: 670px;
+  
   flex-wrap: wrap;
 `
 

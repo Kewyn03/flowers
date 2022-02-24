@@ -357,10 +357,10 @@ const NavMainText = styled.div`
 
   &:nth-child(6) {
     position: relative;
-    z-index: 1;
+    z-index: 4;
 
     &:hover Ul {
-
+      
       height: 169px;
       display: block;
       visibility: visible;

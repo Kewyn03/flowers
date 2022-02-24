@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled, {css} from "styled-components";
-import flowers from "../../flowersJSON";
-
 import {ReactComponent as LikeRC} from '../../assets/images/like.svg'
+import {ReactComponent as SliderArrowRC} from "../../assets/images/arrowSlider.svg";
+import {useAppDispatch, useAppSelector} from "../../hooks/hooks";
+import {fetchFlowers} from "../../store/reducers/userSlice";
+import {Swiper, SwiperSlide, useSwiper} from "swiper/react";
+import {Autoplay, Grid, Navigation, Pagination} from "swiper";
+import '../styles.css'
 
 
 const TitleStyle = css`
@@ -39,15 +43,16 @@ const CardComponent = styled.div`
   border: 1px solid #956D84;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   transition: .5s;
+
   &:nth-child(4n) {
     margin-right: 0;
   }
-  
+
   &:hover {
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.5);
   }
-  
-  
+
+
 `
 
 const Flower = styled.img`
@@ -82,11 +87,12 @@ const TopContainer = styled.div`
 
 const Like = styled(LikeRC)`
   transition: .5s ease;
+
   &:hover {
     cursor: pointer;
     transform: scale(1.5);
   }
-  
+
   position: absolute;
   width: 33px;
   height: 29px;
@@ -113,7 +119,7 @@ const TopCircleText = styled.span`
 `
 
 const BottomContainer = styled.div`
- 
+
 `
 
 const ButtonOrder = styled.div`
@@ -126,12 +132,12 @@ const ButtonOrder = styled.div`
   left: 60px;
   top: 20px;
   transition: .5s;
-  
+
   &:hover {
     opacity: 0.9;
     cursor: pointer;
   }
-  
+
   &:active {
     opacity: 0.6;
   }
@@ -145,7 +151,7 @@ const ButtonFastOrder = styled.span`
   color: #828282;
   ${CircleStyle};
   cursor: pointer;
-  
+
 `
 
 const ButtonText = styled.span`
@@ -154,7 +160,7 @@ const ButtonText = styled.span`
   ${TitleStyle};
   left: 75px;
   top: 23px;
-  
+
 
 `
 
@@ -173,7 +179,7 @@ const BottomName = styled.span`
 
 `
 
-const PriceContainer = styled.div `
+const PriceContainer = styled.div`
   display: flex;
 `
 
@@ -192,49 +198,118 @@ const OldPrice = styled.span`
   margin-right: 5px;
 `
 
-const Card: React.FC = () => {
-    return (
-        <Container>
-            {flowers.roses.map(item => (
-                <CardComponent key={item.id}>
-                    <TopContainer>
-                        {item.discount > 0 ? (
-                            <Circle>
-                                <CircleText>-{item.discount}%</CircleText>
-                            </Circle>
-                        ) : ''}
-                        <Flower src={item.image} alt='flowerImage'/>
-                        <Like/>
-                        <CircleTop>
-                            <TopCircleText>TOP</TopCircleText>
-                        </CircleTop>
-                    </TopContainer>
-                    <BottomContainer>
-                        <TitleContainer>
-                            <BottomName>
-                                {item.name}
-                            </BottomName>
-                            {item.discount > 0 ?
-                                <PriceContainer>
-                                    <OldPrice>
-                                        {item.price} грн
-                                    </OldPrice>
-                                    <Price>
-                                        {Number(item.price) - (Number(item.price) * item.discount / 100)} грн
-                                    </Price>
-                                </PriceContainer>
-                                : <Price>
-                                    {item.price} грн
-                                  </Price>
-                            }
-                        </TitleContainer>
-                        <ButtonOrder><ButtonText>Заказать</ButtonText></ButtonOrder>
-                        <ButtonFastOrder>Быстрый заказ</ButtonFastOrder>
-                    </BottomContainer>
+const SliderArrowNextImg = styled(SliderArrowRC)`
+  cursor: pointer;
+  transition: .5s;
 
-                </CardComponent>
-            ))}
-        </Container>
+  &:hover {
+    opacity: 0.7;
+  }
+
+  transform: scale(-1, 1);
+`
+const SliderArrowPrevImg = styled(SliderArrowRC)`
+  cursor: pointer;
+  transition: .5s;
+
+  &:hover {
+    opacity: 0.7;
+
+  }
+
+`
+
+
+const Card: React.FC = () => {
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        console.log('use effect')
+        dispatch(fetchFlowers())
+
+    }, [])
+
+    let flowers = useAppSelector(state => state.flowersReducer.flowers)
+    let loading = useAppSelector(state => state.flowersReducer.loading)
+    let error = useAppSelector(state => state.flowersReducer.error)
+
+    const swiper = useSwiper()
+
+    return (
+        <>
+            <div className="container">
+                <div className="arrow-prev"/>
+                <div className="arrow-next"/>
+            </div>
+            <Swiper
+
+                slidesPerView={1}
+                spaceBetween={30}
+                navigation={
+                    {
+                        nextEl: ".arrow-next",
+                        prevEl: ".arrow-prev"
+                    }
+                }
+                pagination={{
+                    clickable: true,
+                }}
+
+
+                className="mySwiper"
+                modules={[Navigation, Pagination, Autoplay]}
+            >
+
+                {flowers?.roses.map((item, index) => {
+                    return <SwiperSlide key={index} className="slide">
+                        {item.group.map(item =>
+
+                            <CardComponent key={item.id}>
+                                <TopContainer>
+                                    {item.discount > 0 ? (
+                                        <Circle>
+                                            <CircleText>-{item.discount}%</CircleText>
+                                        </Circle>
+                                    ) : ''}
+                                    <Flower src={item.image} alt='flowerImage'/>
+                                    <Like/>
+                                    <CircleTop>
+                                        <TopCircleText>TOP</TopCircleText>
+                                    </CircleTop>
+                                </TopContainer>
+                                <BottomContainer>
+                                    <TitleContainer>
+                                        <BottomName>
+                                            {item.name}
+                                        </BottomName>
+                                        {item.discount > 0
+                                            ? <PriceContainer>
+                                                <OldPrice>
+                                                    {item.price} грн
+                                                </OldPrice>
+                                                <Price>
+                                                    {Number(item.price) - (Number(item.price) * item.discount / 100)} грн
+                                                </Price>
+                                            </PriceContainer>
+                                            : <Price>
+                                                {item.price} грн
+                                            </Price>
+                                        }
+                                    </TitleContainer>
+                                    <ButtonOrder><ButtonText>Заказать</ButtonText></ButtonOrder>
+                                    <ButtonFastOrder>Быстрый заказ</ButtonFastOrder>
+                                </BottomContainer>
+
+                            </CardComponent>
+                        )}
+                    </SwiperSlide>
+                })
+                }
+
+            </Swiper>
+
+        </>
     );
 };
 

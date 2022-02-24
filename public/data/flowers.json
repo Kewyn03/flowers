@@ -1,0 +1,215 @@
+{
+  "roses": [
+    {
+      "group"
+    :  [
+        {
+          "id": 1,
+          "parentId": 1,
+          "name": "101 красная роза",
+          "price": 2800,
+          "image": "/images/roses/101redrose.png",
+          "discount": 19,
+          "top": true
+        },
+        {
+          "id": 2,
+          "parentId": 2,
+          "name": "25 розовых пионовидных роз",
+          "price": 2800,
+          "image": "/images/roses/25pinkrose.png",
+          "discount": 10,
+          "top": true
+        },
+        {
+          "id": 3,
+          "parentId": 3,
+          "name": "Влюбленность",
+          "price": 2800,
+          "image": "/images/roses/lovers.png",
+          "discount": 19,
+          "top": true
+        },
+        {
+          "id": 4,
+          "parentId": 4,
+          "name": "Корзина солнечного настроения",
+          "price": "1680",
+          "image": "/images/roses/basketsunmood.png",
+          "discount": 0,
+          "top": true
+        },
+        {
+          "id": 5,
+          "parentId": 5,
+          "name": "Цветочная клумба",
+          "price": "1270",
+          "image": "/images/roses/flowerbed.png",
+          "discount": 0,
+          "top": true
+        },
+        {
+          "id": 6,
+          "parentId": 6,
+          "name": "101 красная роза",
+          "price": "2800",
+          "image": "/images/roses/101redrose.png",
+          "discount": 19,
+          "top": true
+        },
+        {
+          "id": 7,
+          "parentId": 7,
+          "name": "25 розовых пионовидных роз",
+          "price": 2800,
+          "image": "/images/roses/25pinkrose.png",
+          "discount": 10,
+          "top": true
+        },
+        {
+          "id": 8,
+          "parentId": 8,
+          "name": "101 красная роза",
+          "price": "2800",
+          "image": "/images/roses/101redrose.png",
+          "discount": 19,
+          "top": true
+        }
+      ]}
+    ,
+    {
+      "group"
+    :  [  {
+        "id": 9,
+        "parentId": 9,
+        "name": "101 красная роза",
+        "price": 2800,
+        "image": "/images/roses/101redrose.png",
+        "discount": 19,
+        "top": true
+      },
+        {
+          "id": 10,
+          "parentId": 10,
+          "name": "25 розовых пионовидных роз",
+          "price": 2800,
+          "image": "/images/roses/25pinkrose.png",
+          "discount": 10,
+          "top": true
+        },
+        {
+          "id": 11,
+          "parentId": 11,
+          "name": "Влюбленность",
+          "price": 2800,
+          "image": "/images/roses/lovers.png",
+          "discount": 19,
+          "top": true
+        },
+        {
+          "id": 12,
+          "parentId": 12,
+          "name": "Корзина солнечного настроения",
+          "price": "1680",
+          "image": "/images/roses/basketsunmood.png",
+          "discount": 0,
+          "top": true
+        },
+        {
+          "id": 13,
+          "parentId": 13,
+          "name": "Цветочная клумба",
+          "price": "1270",
+          "image": "/images/roses/flowerbed.png",
+          "discount": 0,
+          "top": true
+        },
+        {
+          "id": 14,
+          "parentId": 14,
+          "name": "101 красная роза",
+          "price": "2800",
+          "image": "/images/roses/101redrose.png",
+          "discount": 19,
+          "top": true
+        },
+        {
+          "id": 15,
+          "parentId": 15,
+          "name": "25 розовых пионовидных роз",
+          "price": 2800,
+          "image": "/images/roses/25pinkrose.png",
+          "discount": 10,
+          "top": true
+        },
+        {
+          "id": 16,
+          "parentId": 16,
+          "name": "101 красная роза",
+          "price": "2800",
+          "image": "/images/roses/101redrose.png",
+          "discount": 19,
+          "top": true
+        }]}
+  ],
+  "tulip": [
+    {
+      "id": 1,
+      "parentId": 1,
+      "name": "25 желтых тюльпанов",
+      "price": "995",
+      "image": "/assets/images/tulips/25yellowtulips.png",
+      "discount": 10,
+      "top": true
+    },
+    {
+      "id": 2,
+      "parentId": 2,
+      "name": "25 желтых тюльпанов",
+      "price": "995",
+      "image": "/assets/images/tulips/25yellowtulips.png",
+      "discount": 10,
+      "top": true
+    },
+    {
+      "id": 3,
+      "parentId": 3,
+      "name": "25 желтых тюльпанов",
+      "price": "995",
+      "image": "/assets/images/tulips/25yellowtulips.png",
+      "discount": 10,
+      "top": true
+    },
+    {
+      "id": 4,
+      "parentId": 4,
+      "name": "25 желтых тюльпанов",
+      "price": "995",
+      "image": "/assets/images/tulips/25yellowtulips.png",
+      "discount": 10,
+      "top": true
+    }
+  ],
+  "basket": [
+    {
+      "id": 1,
+      "parentId": 1,
+      "name": "Корзина Дюймовочка",
+      "price": "2020",
+      "image": "/assets/images/basket/basketInch.png",
+      "discount": 0,
+      "top": true
+    }
+  ],
+  "bouquets": [
+    {
+      "id": 1,
+      "parentId": 1,
+      "name": "Мечтательница",
+      "price": "2280",
+      "image": "/assets/images/basket/basketInch.png",
+      "discount": 0,
+      "top": true
+    }
+  ]
+}
