@@ -10,6 +10,7 @@ export interface IRoses {
     image: string;
     discount: number;
     top: boolean;
+    stock: boolean;
 }
 
 export interface ITulip {
@@ -20,6 +21,7 @@ export interface ITulip {
     image: string;
     discount: number;
     top: boolean;
+    stock: boolean;
 }
 
 export interface IBasket {
@@ -30,6 +32,7 @@ export interface IBasket {
     image: string;
     discount: number;
     top: boolean;
+    stock: boolean;
 }
 
 export interface IBouquet {
@@ -40,6 +43,7 @@ export interface IBouquet {
     image: string;
     discount: number;
     top: boolean;
+    stock: boolean;
 }
 
 export interface IFlower {

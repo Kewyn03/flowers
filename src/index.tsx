@@ -4,7 +4,7 @@ import App from "./App";
 import {Provider} from "react-redux";
 import {ThemeProvider} from "styled-components";
 import store from './store/store'
-
+import {BrowserRouter} from "react-router-dom";
 
 
 const theme = {
@@ -16,10 +16,12 @@ const theme = {
 }
 
 ReactDOM.render(
-    <ThemeProvider theme={theme}>
-        <Provider store={store}>
-            <App/>
-        </Provider>
-    </ThemeProvider>,
+    <BrowserRouter>
+        <ThemeProvider theme={theme}>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </ThemeProvider>
+    </BrowserRouter>,
     document.getElementById('root')
 );

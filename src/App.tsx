@@ -1,11 +1,13 @@
 import React from 'react';
 import GlobalStyles from './global'
+import {Route, Routes,} from "react-router-dom";
+import FirstPage from "./components/main/FirstPage";
+import NotFound from "./components/NotFound";
+import OrdersPage from "./components/OrdersPage";
+import ItemPage from "./components/ItemPage";
+import MainPage from "./components/main/MainPage";
+import Cart from "./components/Cart";
 
-import Header from "./components/main/header";
-import News from "./components/main/news";
-import Stock from "./components/main/stock";
-import Forum from "./components/main/forum";
-import Footer from "./components/main/footer";
 
 function App() {
 
@@ -13,12 +15,21 @@ function App() {
 
     return (
         <>
-            <Header/>
-            <News/>
-            <Stock/>
-            <Forum/>
-            <Footer/>
             <GlobalStyles/>
+            <Routes>
+
+                <Route path="/" element={<FirstPage/>}>
+                    <Route index element={<MainPage/>}/>
+                    <Route path="flowers">
+                        <Route path=":id" element={<ItemPage/>}/>
+                    </Route>
+                    <Route path="cart" element={<Cart/>}/>
+                    <Route path="orders" element={<OrdersPage/>}/>
+                    <Route path="*" element={<NotFound/>}/>
+
+                </Route>
+
+            </Routes>
         </>
 
 

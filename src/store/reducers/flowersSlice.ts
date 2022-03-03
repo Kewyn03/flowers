@@ -16,12 +16,12 @@ const initialState: FlowersState = {
 
 export const fetchFlowers = createAsyncThunk<IFlower>(
     'flowers/fetchFlowers',
-    async  (_,{rejectWithValue}) => {
+    async  (data,{rejectWithValue}) => {
         try {
             const res = await fetch('/data/flowers.json')
 
             if (!res.ok) {
-                throw new Error('Server error!')
+                new Error('Server error!')
             }
             const data: IFlower = await res.json()
             return data

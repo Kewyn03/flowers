@@ -17,6 +17,7 @@ import ShipcartIcon from '../../assets/images/shoppingcart.svg'
 import {ReactComponent as ArrowDownRC} from "../../assets/images/arrowdown.svg";
 import {ReactComponent as ArrowCategoryRC} from "../../assets/images/arrowdown.svg";
 import {ReactComponent as DdarrowRC} from "../../assets/images/ddarrow.svg";
+import {Link} from "react-router-dom";
 
 const fontNavStyles = css`
   font-family: Museo Sans Cyrl, sans-serif;
@@ -308,7 +309,7 @@ const NavMainText = styled.div`
 
   &:first-child {
     position: relative;
-
+    z-index: 10;
 
     &:hover Ul {
       display: block;
@@ -442,7 +443,7 @@ const Ddarrow = styled(DdarrowRC)`
   transition: all .5s ease-in-out;
 `
 
-const Header = ({...props}) => {
+const Header = () => {
 
 
     return (
@@ -484,7 +485,7 @@ const Header = ({...props}) => {
             </NavPanel>
             <CategoryPanel>
                 <MainHeader>
-                    <LogoImage src={LogoIcon} alt='logo'/>
+                    <Link to="/" style={{alignSelf: "center"}}><LogoImage src={LogoIcon} alt='logo'/></Link>
                     <NavContainer>
                         <SearchGroup>
                             <InputContainer>
@@ -556,7 +557,7 @@ const Header = ({...props}) => {
                         </NumberText>
                         <CartInfoIcons>
                             <CartInfoImg src={BookmarksIcon} alt='like'/>
-                            <CartInfoImg src={ShipcartIcon} alt='shipcart'/>
+                            <Link to="/cart"><CartInfoImg src={ShipcartIcon} alt='shipcart'/></Link>
                             <MoneyValue>$ 1 234</MoneyValue>
                         </CartInfoIcons>
                     </SocialContainer>

@@ -27,20 +27,35 @@
 
 .arrow-prev {
     cursor: pointer;
-    float: left;
     width: 20px;
     height: 30px;
+    margin-right: 20px;
     background-image: url(../assets/images/arrowSlider.svg);
     background-repeat: no-repeat;
+    transition: .5s;
+}
 
+.arrow-prev:hover{
+
+    opacity: 0.8;
+}
+
+.arrow-next:hover{
+    opacity: 0.8;
 }
 
 .arrow-next {
     cursor: pointer;
-    margin-left: auto;
+    transition: .5s;
     width: 20px;
     height: 30px;
     background-image: url(../assets/images/arrowSlider.svg);
     background-repeat: no-repeat;
     transform: scale(-1, 1);
+}
+
+.loader {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 30px;
 }

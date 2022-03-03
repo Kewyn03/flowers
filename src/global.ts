@@ -33,8 +33,28 @@ export default createGlobalStyle`
     font-style: normal;
     font-weight: 300;
   }
-  
-  
 
+  button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    /* отображаем курсор в виде руки при наведении; некоторые
+    считают, что необходимо оставлять стрелочный вид для кнопок */
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+    
+    &:hover {
+      color: #333333;
+    }
+    &:visited {
+      color: #333333;
+    }
+  }
+  
 `
 

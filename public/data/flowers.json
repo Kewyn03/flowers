@@ -10,7 +10,8 @@
           "price": 2800,
           "image": "/images/roses/101redrose.png",
           "discount": 19,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 2,
@@ -19,7 +20,8 @@
           "price": 2800,
           "image": "/images/roses/25pinkrose.png",
           "discount": 10,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 3,
@@ -28,7 +30,8 @@
           "price": 2800,
           "image": "/images/roses/lovers.png",
           "discount": 19,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 4,
@@ -37,7 +40,8 @@
           "price": "1680",
           "image": "/images/roses/basketsunmood.png",
           "discount": 0,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 5,
@@ -46,7 +50,8 @@
           "price": "1270",
           "image": "/images/roses/flowerbed.png",
           "discount": 0,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 6,
@@ -55,7 +60,8 @@
           "price": "2800",
           "image": "/images/roses/101redrose.png",
           "discount": 19,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 7,
@@ -64,7 +70,8 @@
           "price": 2800,
           "image": "/images/roses/25pinkrose.png",
           "discount": 10,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 8,
@@ -73,7 +80,8 @@
           "price": "2800",
           "image": "/images/roses/101redrose.png",
           "discount": 19,
-          "top": true
+          "top": true,
+          "stock": true
         }
       ]}
     ,
@@ -86,25 +94,29 @@
         "price": 2800,
         "image": "/images/roses/101redrose.png",
         "discount": 19,
-        "top": true
+        "top": true,
+        "stock": true
       },
         {
           "id": 10,
           "parentId": 10,
-          "name": "25 розовых пионовидных роз",
-          "price": 2800,
-          "image": "/images/roses/25pinkrose.png",
-          "discount": 10,
-          "top": true
-        },
-        {
-          "id": 11,
-          "parentId": 11,
           "name": "Влюбленность",
           "price": 2800,
           "image": "/images/roses/lovers.png",
           "discount": 19,
-          "top": true
+          "top": true,
+          "stock": true
+        },
+        {
+          "id": 11,
+          "parentId": 11,
+          "name": "25 розовых пионовидных роз",
+          "price": 2800,
+          "image": "/images/roses/25pinkrose.png",
+          "discount": 10,
+          "top": true,
+          "stock": true
+
         },
         {
           "id": 12,
@@ -113,7 +125,8 @@
           "price": "1680",
           "image": "/images/roses/basketsunmood.png",
           "discount": 0,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 13,
@@ -122,7 +135,8 @@
           "price": "1270",
           "image": "/images/roses/flowerbed.png",
           "discount": 0,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 14,
@@ -131,7 +145,8 @@
           "price": "2800",
           "image": "/images/roses/101redrose.png",
           "discount": 19,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 15,
@@ -140,7 +155,8 @@
           "price": 2800,
           "image": "/images/roses/25pinkrose.png",
           "discount": 10,
-          "top": true
+          "top": true,
+          "stock": true
         },
         {
           "id": 16,
@@ -149,7 +165,8 @@
           "price": "2800",
           "image": "/images/roses/101redrose.png",
           "discount": 19,
-          "top": true
+          "top": true,
+          "stock": true
         }]}
   ],
   "tulip": [
@@ -160,7 +177,8 @@
       "price": "995",
       "image": "/assets/images/tulips/25yellowtulips.png",
       "discount": 10,
-      "top": true
+      "top": true,
+      "stock": true
     },
     {
       "id": 2,
@@ -169,7 +187,8 @@
       "price": "995",
       "image": "/assets/images/tulips/25yellowtulips.png",
       "discount": 10,
-      "top": true
+      "top": true,
+      "stock": true
     },
     {
       "id": 3,
@@ -178,7 +197,8 @@
       "price": "995",
       "image": "/assets/images/tulips/25yellowtulips.png",
       "discount": 10,
-      "top": true
+      "top": true,
+      "stock": true
     },
     {
       "id": 4,
@@ -187,7 +207,8 @@
       "price": "995",
       "image": "/assets/images/tulips/25yellowtulips.png",
       "discount": 10,
-      "top": true
+      "top": true,
+      "stock": true
     }
   ],
   "basket": [
@@ -198,7 +219,8 @@
       "price": "2020",
       "image": "/assets/images/basket/basketInch.png",
       "discount": 0,
-      "top": true
+      "top": true,
+      "stock": true
     }
   ],
   "bouquets": [
@@ -209,7 +231,8 @@
       "price": "2280",
       "image": "/assets/images/basket/basketInch.png",
       "discount": 0,
-      "top": true
+      "top": true,
+      "stock": true
     }
   ]
 }
