@@ -45,13 +45,27 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  button:disabled,
+  button:disabled:hover,
+  button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: default;
+  }
+
   a {
     text-decoration: none;
-    
     &:hover {
       color: #333333;
     }
     &:visited {
+      color: #333333;
+    }
+    &:active {
+      color: #333333;
+    }
+    &:link{
       color: #333333;
     }
   }

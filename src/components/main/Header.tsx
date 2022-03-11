@@ -14,10 +14,12 @@ import SearchIconRC from '../../assets/images/search.svg'
 import ShipcartIcon from '../../assets/images/shoppingcart.svg'
 
 
-import {ReactComponent as ArrowDownRC} from "../../assets/images/arrowdown.svg";
-import {ReactComponent as ArrowCategoryRC} from "../../assets/images/arrowdown.svg";
+import {ReactComponent as ArrowDownRC, ReactComponent as ArrowCategoryRC} from "../../assets/images/arrowdown.svg";
 import {ReactComponent as DdarrowRC} from "../../assets/images/ddarrow.svg";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useAppSelector} from "../../hooks/hooks";
+import {selectCartItems} from "../../store/reducers/flowersSlice";
+import {ICartItem} from "../../models/ICartItems";
 
 const fontNavStyles = css`
   font-family: Museo Sans Cyrl, sans-serif;
@@ -28,14 +30,11 @@ const fontNavStyles = css`
   
 `
 
-
 const NavPanel = styled.header`
-  
   flex-wrap: wrap;
 `
 
 const CategoryPanel = styled.div`
-
 `
 
 const TopHeader = styled.div`
@@ -95,12 +94,9 @@ const NavText = styled.li`
 
   &:nth-child(8) {
     margin-right: 0;
-
     padding-left: 1%;
     margin-left: auto;
-
   }
-
   display: flex;
 `
 
@@ -149,14 +145,10 @@ const LogoImage = styled.img`
   width: 120px;
   height: 120px;
   cursor: pointer;
-
 `
 
-
 const SearchGroup = styled.div`
-
   width: 1200px;
-
 `
 
 
@@ -168,7 +160,6 @@ const InputCategories = styled.input.attrs({
   width: 250px;
   margin-right: 2%;
   padding: 2%;
- 
   color: #828282;
   border: none;
   border-bottom: 1px solid #956D84;
@@ -182,7 +173,6 @@ const InputCategories = styled.input.attrs({
 const InputSearch = styled.input.attrs({
     type: 'search'
 })`
-
   height: 18px;
   width: 620px;
   padding: 2% 2% 2% 0;
@@ -191,29 +181,22 @@ const InputSearch = styled.input.attrs({
   border: none;
   border-bottom: 1px solid #956D84;
   outline: none;
-
   @media (max-width: 1600px) {
     width: 540px;
   }
-
-
   ::placeholder {
     color: #828282;
   }
 `
 
 const InputContainer = styled.span`
-
   position: relative;
-
   &:first-child img {
-
     top: 7px;
     left: 3px;
     padding: 0;
 
   }
-
   &:nth-child(2) img {
     position: absolute;
     top: 10px;
@@ -222,8 +205,6 @@ const InputContainer = styled.span`
 `
 
 const SocialGroupIcons = styled.div`
-
-
 `
 
 const SocialIcon = styled.img`
@@ -236,11 +217,9 @@ const SocialIcon = styled.img`
   float: left;
   margin: 2.5%;
   cursor: pointer;
-
   &:hover {
     opacity: 0.9;
   }
-
   &:active {
     opacity: 0.6;
   }
@@ -256,7 +235,6 @@ const NavContainer = styled.div`
 
   @media (max-width: 1600px) {
     width: 1600px;
-
   }
   margin-top: 3%;
   margin-left: 8%;
@@ -270,7 +248,6 @@ const NavMainHeader = styled.div`
 `
 
 const Ul = styled.ul`
-
   height: 335px;
   width: 240px;
   color: #000000;
@@ -278,13 +255,11 @@ const Ul = styled.ul`
   border: 1px solid #956D84;
   display: none;
   visibility: hidden;
-
   //&:hover Li Ul   {
   //  display: none;
   //  visibility: visible;
   //  opacity: 0;
   //}
-
 `
 
 const Li = styled.li`
@@ -295,7 +270,6 @@ const Li = styled.li`
     color: #FFFFFF;
     background: #956D84;
     cursor: pointer;
-
   }
 `
 
@@ -420,7 +394,7 @@ const SearchIcon = styled.img`
 `
 
 const MoneyValue = styled.span`
-
+  margin-left: 20px;
   flex-wrap: wrap;
   font-size: 17px;
   color: #828282;
@@ -442,9 +416,41 @@ const Ddarrow = styled(DdarrowRC)`
   stroke-width: 1.2;
   transition: all .5s ease-in-out;
 `
+const ShipContainer = styled.div `
+  position: relative;
+`
+
+const Circle = styled.div `
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: -5px;
+  background: #956D84;
+  border-radius: 50%;
+  
+`
+
+const CircleNumber = styled.span `
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 17px;
+  width: 16px;
+  color: #FFFFFF;
+  font-size: 10px;
+  line-height: 10px;
+`
 
 const Header = () => {
 
+    const items = useAppSelector(selectCartItems)
+
+    let navigate = useNavigate()
+
+    let fullprice = items?.reduce((sum, item: ICartItem) => {
+        return sum + (item.cartItem.price - item.cartItem.price * item.cartItem.discount / 100) * item.quantity
+
+    }, 0)
 
     return (
         <>
@@ -498,7 +504,7 @@ const Header = () => {
                             </InputContainer>
                         </SearchGroup>
                         <NavMainHeader>
-                            <NavMainText>
+                            <NavMainText onClick={() => navigate('/catalog')}>
                                 Каталог товаров
                                 <ArrowCategory/>
                                 <Ul>
@@ -557,8 +563,15 @@ const Header = () => {
                         </NumberText>
                         <CartInfoIcons>
                             <CartInfoImg src={BookmarksIcon} alt='like'/>
-                            <Link to="/cart"><CartInfoImg src={ShipcartIcon} alt='shipcart'/></Link>
-                            <MoneyValue>$ 1 234</MoneyValue>
+                            <Link to="/cart">
+                                {(items?.length ?? null)
+                                    ? <ShipContainer>
+                                        <Circle><CircleNumber>{items?.length}</CircleNumber></Circle>
+                                        <CartInfoImg src={ShipcartIcon} alt='shipcart'/>
+                                      </ShipContainer>
+                                    : <CartInfoImg src={ShipcartIcon} alt='shipcart'/>}
+                            </Link>
+                            <MoneyValue>{fullprice} грн.</MoneyValue>
                         </CartInfoIcons>
                     </SocialContainer>
                 </MainHeader>

@@ -1,14 +1,22 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IFlower} from "../../models/IFlower";
+import {IFlower, IRoses} from "../../models/IFlower";
+import {ICartItem} from "../../models/ICartItems";
+import {RootState} from "../store";
+import {IOrder} from "../../models/IOrder";
+
 
 interface FlowersState {
-    flowers: IFlower | null
+    flowers: IRoses[]
+    cartItems: ICartItem[]
+    orders: IOrder[]
     loading: boolean
     error: any
 }
 
 const initialState: FlowersState = {
-    flowers: null,
+    flowers: [],
+    cartItems: [],
+    orders: [],
     loading: false,
     error: null
 }
@@ -16,7 +24,7 @@ const initialState: FlowersState = {
 
 export const fetchFlowers = createAsyncThunk<IFlower>(
     'flowers/fetchFlowers',
-    async  (data,{rejectWithValue}) => {
+    async (data, {rejectWithValue}) => {
         try {
             const res = await fetch('/data/flowers.json')
 
@@ -26,7 +34,7 @@ export const fetchFlowers = createAsyncThunk<IFlower>(
             const data: IFlower = await res.json()
             return data
 
-        } catch (error : any) {
+        } catch (error: any) {
             return rejectWithValue(error.message)
         }
 
@@ -36,7 +44,52 @@ export const fetchFlowers = createAsyncThunk<IFlower>(
 const flowersSlice = createSlice({
     name: 'flowers',
     initialState,
-    reducers: {},
+    reducers: {
+        add: (state: FlowersState, {payload}) => {
+            const cartItem = state.cartItems?.find(item => item.cartItem.id === payload.id)
+            if (cartItem) {
+                    cartItem.quantity += 1
+            } else {
+                state.cartItems.push({
+                    cartItem:payload,
+                    quantity:1
+                })
+            }
+        },
+        remove: (state: FlowersState, {payload}) => {
+            state.cartItems = state.cartItems?.filter(item => item.cartItem.id !== payload)
+        },
+        increment: (state: FlowersState, {payload}) => {
+
+            const cartItem = state.cartItems?.find(item => item.cartItem.id === payload.id)
+            if (cartItem) {
+                     cartItem.quantity += 1
+            } else {
+               const rose = state.flowers?.find(item => item.id === payload.id)
+                if (rose){
+                    state.cartItems?.push({
+                        cartItem:rose,
+                        quantity:1
+                    })
+                }
+            }
+        }
+        ,
+        decrement: (state: FlowersState, {payload}) => {
+            const cartItem = state.cartItems?.find(item => item.cartItem.id === payload.id)
+            if (cartItem) {
+                cartItem.quantity -= 1
+            }
+        },
+        addOrders: (state:FlowersState,{payload}) => {
+            console.log(payload,'payload')
+            state.orders.push({
+                order:payload,
+                price:payload.price
+            })
+            state.cartItems?.splice(0)
+        }
+    },
     extraReducers: (builder) => {
 
         // When we send a request,
@@ -52,13 +105,12 @@ const flowersSlice = createSlice({
         // When a server responses with the data,
         // `fetchTodos.fulfilled` is fired:
         builder.addCase(fetchFlowers.fulfilled,
-            (state, { payload }) => {
+            (state, {payload}) => {
                 // We add all the new todos into the state
                 // and change `status` back to `idle`:
-                state.flowers = payload
+                const roses = payload.roses.flat(1)
+                state.flowers.push(...roses)
                 state.loading = false
-
-
             });
 
         // When a server responses with an error:
@@ -66,14 +118,25 @@ const flowersSlice = createSlice({
             (state) => {
                 // We show the error message
                 // and change `status` back to `idle` again.
-              state.error = 'huy'
+                state.error = 'huy'
             });
     },
 
 
-
-
 })
 
-export const {} = flowersSlice.actions
+export const {add, remove, increment, decrement, addOrders} = flowersSlice.actions
 export default flowersSlice.reducer
+
+export const selectItem = (state: RootState, id: number | string | undefined )  => {
+   return state.flowersReducer.flowers.find(el => el.id === Number(id))
+}
+
+export const selectCartItems = (state: RootState) => {
+    return state.flowersReducer.cartItems
+}
+
+export const selectQuantityFromCart = (state: RootState, id: number | string | undefined ) => {
+    const item = state.flowersReducer.cartItems.find(el => el.cartItem.id === Number(id))
+    return item?.quantity || 0
+}

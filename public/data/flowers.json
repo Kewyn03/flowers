@@ -1,8 +1,6 @@
 {
   "roses": [
-    {
-      "group"
-    :  [
+    [
         {
           "id": 1,
           "parentId": 1,
@@ -11,7 +9,8 @@
           "image": "/images/roses/101redrose.png",
           "discount": 19,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 2,
@@ -21,7 +20,8 @@
           "image": "/images/roses/25pinkrose.png",
           "discount": 10,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 3,
@@ -31,7 +31,8 @@
           "image": "/images/roses/lovers.png",
           "discount": 19,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 4,
@@ -41,7 +42,8 @@
           "image": "/images/roses/basketsunmood.png",
           "discount": 0,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 5,
@@ -51,7 +53,8 @@
           "image": "/images/roses/flowerbed.png",
           "discount": 0,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 6,
@@ -61,7 +64,8 @@
           "image": "/images/roses/101redrose.png",
           "discount": 19,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 7,
@@ -71,7 +75,8 @@
           "image": "/images/roses/25pinkrose.png",
           "discount": 10,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 8,
@@ -81,93 +86,100 @@
           "image": "/images/roses/101redrose.png",
           "discount": 19,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         }
-      ]}
+      ]
     ,
-    {
-      "group"
-    :  [  {
+       [  {
         "id": 9,
         "parentId": 9,
-        "name": "101 красная роза",
+        "name": "101 красная роза 22222",
         "price": 2800,
         "image": "/images/roses/101redrose.png",
         "discount": 19,
         "top": true,
-        "stock": true
+        "stock": true,
+        "quantity": 1
       },
         {
           "id": 10,
           "parentId": 10,
-          "name": "Влюбленность",
+          "name": "Влюбленность 22222",
           "price": 2800,
           "image": "/images/roses/lovers.png",
           "discount": 19,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 11,
           "parentId": 11,
-          "name": "25 розовых пионовидных роз",
+          "name": "25 розовых пионовидных роз 22222",
           "price": 2800,
           "image": "/images/roses/25pinkrose.png",
           "discount": 10,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
 
         },
         {
           "id": 12,
           "parentId": 12,
-          "name": "Корзина солнечного настроения",
+          "name": "Корзина солнечного настроения 22222",
           "price": "1680",
           "image": "/images/roses/basketsunmood.png",
           "discount": 0,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 13,
           "parentId": 13,
-          "name": "Цветочная клумба",
+          "name": "Цветочная клумба 22222",
           "price": "1270",
           "image": "/images/roses/flowerbed.png",
           "discount": 0,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 14,
           "parentId": 14,
-          "name": "101 красная роза",
+          "name": "101 красная роза 22222",
           "price": "2800",
           "image": "/images/roses/101redrose.png",
           "discount": 19,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 15,
           "parentId": 15,
-          "name": "25 розовых пионовидных роз",
+          "name": "25 розовых пионовидных роз 22222",
           "price": 2800,
           "image": "/images/roses/25pinkrose.png",
           "discount": 10,
           "top": true,
-          "stock": true
+          "stock": true,
+          "quantity": 1
         },
         {
           "id": 16,
           "parentId": 16,
-          "name": "101 красная роза",
+          "name": "101 красная роза 22222",
           "price": "2800",
           "image": "/images/roses/101redrose.png",
           "discount": 19,
           "top": true,
-          "stock": true
-        }]}
+          "stock": true,
+          "quantity": 1
+        }]
   ],
   "tulip": [
     {

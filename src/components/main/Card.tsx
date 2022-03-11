@@ -101,15 +101,20 @@ const Card: React.FC = () => {
                 modules={[Navigation, Pagination, Autoplay]}
             >
 
-                {!loading ? flowers?.roses.map((item, index) => {
-
-                        return <SwiperSlide key={index} className="slide">
-                            {item.group.map((item) => (
-                               <OneCard key={item.id} item={item} loading={loading}/>
-                                )
-                            )}
-                        </SwiperSlide>
-                    })
+                {
+                    !loading
+                        ? <>
+                            <SwiperSlide  className="slide">
+                                {
+                                    flowers.slice(0,8).map(item => <OneCard item={item} loading={loading}/>)
+                                }
+                            </SwiperSlide>
+                            <SwiperSlide  className="slide">
+                                {
+                                    flowers.slice(8,16).map(item => <OneCard item={item} loading={loading}/>)
+                                }
+                            </SwiperSlide>
+                        </>
                     : <Loader/>}
 
             </Swiper>

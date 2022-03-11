@@ -3,6 +3,10 @@ import styled, {css} from "styled-components";
 import {useFormik} from "formik";
 import Arrow from "../assets/images/arrowdown.svg"
 import Vector from "../assets/images/vector.svg"
+import {useAppDispatch, useAppSelector} from "../hooks/hooks";
+import {addOrders, selectCartItems} from "../store/reducers/flowersSlice";
+import {ICartItem} from "../models/ICartItems";
+import {useNavigate} from "react-router-dom";
 
 const TitleStyle = css`
   font-family: Museo Sans Cyrl, sans-serif;
@@ -61,44 +65,34 @@ const Box = styled.div`
 
   &:nth-child(3) {
     width: 480px;
-    height: 574px;
     border: 1px solid #956D84;
     margin-top: 17px;
+    min-height: 474px;
   }
 
 `
-
 const OrderBox = styled.div`
-
 `
 
 const Checklist = styled.div`
   position: relative;
-  
- 
   width: 415px;
-  height: 544px;
   border: 1px solid #956D84;
+  
 `
 
-const CheckContainer = styled.div `
+const CheckContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 40px;
   margin-left: 40px;
 
-  
 `
-
-
 const Coupons = styled.div`
-
 `
-
-const Button = styled.button.attrs( ({
+const Button = styled.button.attrs(({
     type: "submit"
 }))`
-  position: absolute;
   width: 220px;
   height: 63px;
   box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.15);
@@ -106,8 +100,9 @@ const Button = styled.button.attrs( ({
   background-color: #956D84;
   border: none;
   transition: .5s;
-  left: 95px;
-  bottom: 40px;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  margin-top: 30px;
 
   &:hover {
     opacity: 0.9;
@@ -120,11 +115,8 @@ const Button = styled.button.attrs( ({
 `
 
 const ButtonText = styled.span`
-  position: absolute;
   color: #FFFFFF;
   ${TitleStyle};
-  left: 35px;
-  top: 23px;
 `
 
 const CustomInput = styled.input.attrs({
@@ -284,7 +276,7 @@ const Checkbox = styled.input.attrs({
 `
 
 const TextCheckbox = styled.label`
-
+  
   font-family: Museo Sans Cyrl, sans-serif;
   font-style: normal;
   font-weight: 250;
@@ -347,6 +339,7 @@ const Boxes = styled.div`
   flex-direction: column;
   margin-top: 100px;
   margin-left: 50px;
+  
 `
 
 const PlaceDelivery = styled.div`
@@ -367,6 +360,7 @@ const PlaceDelivery = styled.div`
     label {
       width: 130px;
     }
+    
   }
 `
 
@@ -386,22 +380,69 @@ const ItemsText = styled.div`
   font-size: 16px;
   line-height: 18px;
   color: #BDBDBD;
+  width: 150px;
+
+`
+
+const OrderLine = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  justify-content: space-between;
+
+  &:nth-child(2) {
+    margin-top: 40px;
+  }
 `
 
 const ReportDelivery = styled.div`
- 
+  display: flex;
+  flex-direction: row;
   font-family: Euclid Circular B, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 18px;
   color: #333333;
+  margin-top: 15px;
+  
+  &:last-child {
+    margin-top: 40px;
+    font-size: 24px;
+  }
+
 `
 
+const ItemsNumber = styled.div`
+
+`
+const ItemsPrice = styled.div`
+  margin-right: 40px;
+  text-align: right;
+`
+
+const TextRight = styled.div`
+  margin-left: auto;
+  margin-right: 38px;
+  text-align: right;
+`
+
+const ReportBox = styled.div`
+  margin-top: 40px;
+`
 
 const OrdersPage = () => {
 
-    useEffect(() => window.scrollTo(0,300),[])
+    useEffect(() => window.scrollTo(0, 300), [])
+    const dispatch = useAppDispatch()
+    const items = useAppSelector(selectCartItems)
+
+    let total = items?.reduce((sum, item: ICartItem) => {
+        return sum + (item.cartItem.price - item.cartItem.price * item.cartItem.discount / 100) * item.quantity
+
+    }, 0)
+
+    let navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
@@ -414,17 +455,35 @@ const OrdersPage = () => {
             fullName: '',
             phone: '',
             email: '',
-            checked: [],
-            reason: '',
-            text: '',
+            Surprise: false,
+            Photo: false,
+            AddVase: false,
+            Notification: false,
+            BusinessCard: false,
+            PostcardFully: false,
+            Reason: '',
+            Text: '',
+            PostcardFullyPrice: 75,
+            PhotoPrice: 15,
+            AddVasePrice: 249,
 
         },
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2))
+        onSubmit: (values) => {
+           alert(JSON.stringify(values,null,2))
+            navigate('/')
         }
     });
 
+    let postcardChecker = formik.values.PostcardFully ? formik.values.PostcardFullyPrice : 0
+    let photoChecker = formik.values.Photo ? formik.values.PhotoPrice : 0
+    let addVaseChecker = formik.values.AddVase ? formik.values.AddVasePrice : 0
 
+
+    let price = total + 100 + postcardChecker + photoChecker + addVaseChecker
+
+    const addOrder = (price:number,values:any) => {
+        dispatch(addOrders({...items,price,values}))
+    }
     return (
         <>
             <Text>Оформление заказа</Text>
@@ -434,9 +493,8 @@ const OrdersPage = () => {
                         <Box>
                             <Headline>1. Контакты получателя</Headline>
                             <Place>
-                                <LabelInput htmlFor="fullNameReceiver">Имя получателя *</LabelInput>
+                                <LabelInput>Имя получателя *</LabelInput>
                                 <CustomInput
-                                    id="fullNameReceiver"
                                     name="fullNameReceiver"
                                     type="text"
                                     required
@@ -445,9 +503,8 @@ const OrdersPage = () => {
                                 />
                             </Place>
                             <Place>
-                                <LabelInput htmlFor="region">Регион *</LabelInput>
+                                <LabelInput>Регион *</LabelInput>
                                 <CustomInput
-                                    id="region"
                                     name="region"
                                     type="text"
                                     required
@@ -456,9 +513,8 @@ const OrdersPage = () => {
                                 />
                             </Place>
                             <Place>
-                                <LabelInput htmlFor="phoneReceiver">Телефон получателя *</LabelInput>
+                                <LabelInput>Телефон получателя *</LabelInput>
                                 <CustomInput
-                                    id="phoneReceiver"
                                     name="phoneReceiver"
                                     type="text"
                                     required
@@ -467,9 +523,8 @@ const OrdersPage = () => {
                                 />
                             </Place>
                             <Place>
-                                <LabelInput htmlFor="address">Адрес *</LabelInput>
+                                <LabelInput>Адрес *</LabelInput>
                                 <CustomInput
-                                    id="address"
                                     name="address"
                                     type="text"
                                     required
@@ -479,9 +534,8 @@ const OrdersPage = () => {
                                 />
                             </Place>
                             <Place>
-                                <LabelInput htmlFor="date">Дата доставки</LabelInput>
+                                <LabelInput>Дата доставки</LabelInput>
                                 <CustomInput
-                                    id="date"
                                     name="date"
                                     type="date"
                                     onChange={formik.handleChange}
@@ -489,9 +543,8 @@ const OrdersPage = () => {
                                 />
                             </Place>
                             <Place>
-                                <LabelInput htmlFor="time">Время доставки</LabelInput>
+                                <LabelInput>Время доставки</LabelInput>
                                 <Select
-                                    id="time"
                                     name="time"
                                     onChange={formik.handleChange}
                                     value={formik.values.time}
@@ -506,9 +559,8 @@ const OrdersPage = () => {
                         <Box>
                             <Headline>2. Контакты отправителя</Headline>
                             <PlaceContacts>
-                                <LabelInput htmlFor="fullName">Имя *</LabelInput>
+                                <LabelInput>Имя *</LabelInput>
                                 <CustomInput
-                                    id="fullName"
                                     name="fullName"
                                     type="text"
                                     required
@@ -517,9 +569,8 @@ const OrdersPage = () => {
                                 />
                             </PlaceContacts>
                             <PlaceContacts>
-                                <LabelInput htmlFor="phone">Телефон *</LabelInput>
+                                <LabelInput>Телефон *</LabelInput>
                                 <CustomInput
-                                    id="phone"
                                     name="phone"
                                     type="text"
                                     required
@@ -528,9 +579,8 @@ const OrdersPage = () => {
                                 />
                             </PlaceContacts>
                             <PlaceContacts>
-                                <LabelInput htmlFor="email">Email *</LabelInput>
+                                <LabelInput>Email *</LabelInput>
                                 <CustomInput
-                                    id="email"
                                     name="email"
                                     type="email"
                                     required
@@ -542,76 +592,79 @@ const OrdersPage = () => {
                         <Box>
                             <Headline>3. Детали доставки</Headline>
                             <Boxes>
-                                <TextCheckbox htmlFor="checked">
+                                <TextCheckbox>
                                     <Checkbox
-                                        id="checked"
-                                        name="checked"
+                                        name="Surprise"
                                         onChange={formik.handleChange}
-                                        value="surprise"/>
+                                        checked={formik.values.Surprise}
+                                    />
                                     <span>Доставка с сюрпризом</span>
                                 </TextCheckbox>
-                                <TextCheckbox htmlFor="checked2">
+                                <TextCheckbox>
                                     <Checkbox
-                                        id="checked2"
-                                        name="checked"
+                                        name="Photo"
                                         onChange={formik.handleChange}
-                                        value="photoreport"/>
+                                        checked={formik.values.Photo}
+                                        value={formik.values.PhotoPrice}/>
                                     <span>Фотоотчет (+15 грн)</span>
                                 </TextCheckbox>
-                                <TextCheckbox htmlFor="checked3">
+                                <TextCheckbox>
                                     <Checkbox
-                                        id="checked3"
-                                        name="checked"
+                                        name="AddVase"
                                         onChange={formik.handleChange}
-                                        value="addVase"/>
+                                        checked={formik.values.AddVase}
+                                        value={formik.values.AddVasePrice}/>
                                     <span>Добавить вазу (+249 грн)</span>
                                 </TextCheckbox>
-                                <TextCheckbox htmlFor="checked4">
+                                <TextCheckbox>
                                     <Checkbox
-                                        id="checked4"
-                                        name="checked"
+                                        name="Notification"
                                         onChange={formik.handleChange}
-                                        value="event"/>
+                                        checked={formik.values.Notification}/>
                                     <span>Напомнить о событии</span>
                                 </TextCheckbox>
-                                <TextCheckbox htmlFor="checked5">
+                                <TextCheckbox>
                                     <Checkbox
-                                        id="checked5"
-                                        name="checked"
+                                        name="BusinessCard"
                                         onChange={formik.handleChange}
-                                        value="postcard"/>
-                                    <span>Визитка
-                                    </span>
+                                        checked={formik.values.BusinessCard}
+                                    />
+                                    <span>Визитка</span>
                                 </TextCheckbox>
-                                <TextCheckbox htmlFor="checked6">
+                                <TextCheckbox>
                                     <Checkbox
-                                        id="checked6"
-                                        name="checked"
+                                        name="PostcardFully"
                                         onChange={formik.handleChange}
-                                        value="postcardFully"/>
-                                    <span>Полномасштабная открытка (+79 грн)
-                                    </span>
+                                        checked={formik.values.PostcardFully}
+                                        value={formik.values.PostcardFullyPrice}/>
+                                    <span>Полномасштабная открытка (+75 грн)</span>
                                 </TextCheckbox>
-                                <PlaceDelivery>
-                                    <LabelInput htmlFor="reason">Повод для открытки</LabelInput>
-                                    <CustomInput
-                                        id="reason"
-                                        name="reason"
-                                        type="text"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.reason}
-                                    />
-                                </PlaceDelivery>
-                                <PlaceDelivery>
-                                    <LabelInput htmlFor="text">Текст открытки</LabelInput>
-                                    <CustomInput
-                                        id="text"
-                                        name="text"
-                                        type="text"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.text}
-                                    />
-                                </PlaceDelivery>
+                                {
+                                    formik.values.PostcardFully &&
+                                    <>
+                                        <PlaceDelivery>
+                                            <LabelInput>Повод для открытки</LabelInput>
+                                            <CustomInput
+                                                name="Reason"
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Reason}
+                                                required
+                                            />
+                                        </PlaceDelivery>
+                                        <PlaceDelivery>
+                                            <LabelInput>Текст открытки</LabelInput>
+                                            <CustomInput
+                                                name="Text"
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Text}
+                                                required
+                                            />
+                                        </PlaceDelivery>
+                                    </>
+                                }
+
                             </Boxes>
                         </Box>
                     </FieldsBox>
@@ -619,11 +672,22 @@ const OrdersPage = () => {
                         <Checklist>
                             <CheckContainer>
                                 <Title>Ваш заказ</Title>
-                                <ItemsText>25 желтых тюльпанов</ItemsText>
-                                <ReportDelivery>Сумма заказа</ReportDelivery>
-                                <ReportDelivery>Доставка</ReportDelivery>
-                                <ReportDelivery>Фотоотчет</ReportDelivery>
-                                <Button><ButtonText>Оформить заказ</ButtonText></Button>
+                                {items?.map(item =>
+                                    <OrderLine key={item.cartItem.id}>
+                                        <ItemsText>{item.cartItem.name}</ItemsText>
+                                        <ItemsNumber>{item.quantity}</ItemsNumber>
+                                        <ItemsPrice>{(item.cartItem.price - item.cartItem.price * item.cartItem.discount / 100) * item.quantity} грн.</ItemsPrice>
+                                    </OrderLine>
+                                )}
+                                <ReportBox>
+                                    <ReportDelivery>Сумма заказа <TextRight>{total} грн.</TextRight></ReportDelivery>
+                                    <ReportDelivery>Доставка <TextRight>100 грн.</TextRight></ReportDelivery>
+                                    {formik.values.Photo && <ReportDelivery>Фотоотчет<TextRight>15 грн.</TextRight></ReportDelivery>}
+                                    {formik.values.AddVase && <ReportDelivery>Добавить вазу<TextRight>249 грн.</TextRight></ReportDelivery>}
+                                    {formik.values.PostcardFully && <ReportDelivery>Полномасштабная открытка<TextRight>75 грн.</TextRight></ReportDelivery>}
+                                    <ReportDelivery>Всего <TextRight>{price} грн.</TextRight></ReportDelivery>
+                                </ReportBox>
+                                <Button onClick={() => addOrder(price,formik.values)}><ButtonText>Оформить заказ</ButtonText></Button>
                             </CheckContainer>
                         </Checklist>
                         <Coupons>

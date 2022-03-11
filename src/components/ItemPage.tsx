@@ -4,6 +4,8 @@ import {useAppSelector} from "../hooks/hooks";
 import {Link, useParams} from "react-router-dom";
 import {ReactComponent as LikeRC} from "../assets/images/like.svg";
 import Counter from "./Counter";
+import {selectItem, selectQuantityFromCart} from "../store/reducers/flowersSlice";
+
 
 const TitleStyle = css`
   font-family: Museo Sans Cyrl, sans-serif;
@@ -19,8 +21,6 @@ const Container = styled.div`
   width: 1420px;
   height: 650px;
 `
-
-
 const FlowerImage = styled.img`
   position: absolute;
   left: 25%;
@@ -49,7 +49,6 @@ const Circle = styled.div`
 `
 
 const CircleText = styled.span`
-
   position: absolute;
   font-size: 24px;
   left: 22px;
@@ -110,24 +109,20 @@ const DiscountPrice = styled.div`
   color: #BDBDBD;
   margin-top: 54px;
   margin-left: 40px;
-
 `
 
 const InfoBox = styled.div`
   margin-left: 120px;
-
 `
 
 const PriceGroup = styled.div`
   display: flex;
 
 `
-
 const DescriptionTitle = styled.div`
   font-size: 16px;
   line-height: 18px;
   color: #BDBDBD;
-
   margin-top: 25px;
 `
 
@@ -153,17 +148,9 @@ const DescriptionBox = styled.div`
   &:first-child {
     width: 140px;
   }
-
 `
 
-const ButtonText = styled.span`
-  position: absolute;
-  color: #FFFFFF;
-  ${TitleStyle};
-  left: 65px;
-  top: 23px;
-`
-const ButtonOrder = styled.div`
+const ButtonOrder = styled.button`
   position: relative;
   width: 220px;
   height: 63px;
@@ -171,10 +158,12 @@ const ButtonOrder = styled.div`
   border-radius: 7px;
   background-color: #956D84;
   left: 30px;
-  top: 20px;
+  top: -15px;
   transition: .5s;
   margin-top: 30px;
-
+  color: #FFFFFF;
+  ${TitleStyle};
+  
   &:hover {
     opacity: 0.9;
     cursor: pointer;
@@ -185,42 +174,56 @@ const ButtonOrder = styled.div`
   }
 `
 
-
-
-const CounterBox = styled.div `
+const CounterBox = styled.div`
   display: flex;
+  height: 170px;
+  align-items: center;
 `
 
-const ItemPage = () => {
+
+const ItemPage: React.FC = () => {
 
     useEffect(() => window.scrollTo(0, 0), [])
 
-    const arr = useAppSelector(state => state.flowersReducer.flowers)
     const {id} = useParams()
 
-    const newItems = arr?.roses.map(item => item.group.find(el => el.id == id))
-    const items = newItems?.find(el => el)
+    const item = useAppSelector(state => selectItem(state, id))
+    const quantity = useAppSelector(state => selectQuantityFromCart(state, id))
 
-    const discount = Number(items.price) - (Number(items.price) * items.discount / 100)
+    // const addItem = () => {
+    //     dispatch(add(item))
+    // }
+    console.log(quantity)
+
+    let discount
+    if (item){
+        discount = item.price - item.price * item.discount / 100
+    }
 
 
     return (
         <Container>
             <FlowerBox>
-                {items.discount > 0 ? (
-                    <Circle>
-                        <CircleText>-{items.discount}%</CircleText>
-                    </Circle>
-                ) : ''}
-                <FlowerImage src={items.image}/>
+                {
+                    !!item?.discount
+                        ? <Circle><CircleText>-{item.discount}%</CircleText></Circle>
+                        : ''
+                }
+                <FlowerImage src={item?.image}/>
                 <Like/>
             </FlowerBox>
             <InfoBox>
-                <Title>{items.name}</Title>
-                {items.stock ? <StockMessage>В наличии</StockMessage> : <StockMessage>Нет в наличии</StockMessage>}
-                {items.discount ?
-                    <PriceGroup><Price>{discount} грн.</Price><DiscountPrice>{items.price} грн.</DiscountPrice></PriceGroup> :
-                    <Price>{items.price}</Price>}
+                <Title>{item?.name}</Title>
+                {
+                    item?.stock
+                        ? <StockMessage>В наличии</StockMessage>
+                        : <StockMessage>Нет в наличии</StockMessage>
+                }
+                {
+                    item?.discount
+                        ? <PriceGroup><Price>{discount} грн.</Price><DiscountPrice>{item.price} грн.</DiscountPrice></PriceGroup>
+                        : <Price>{item?.price} грн.</Price>
+                }
                 <Box>
                     <DescriptionBox>
                         <DescriptionTitle>Цветы</DescriptionTitle>
@@ -229,15 +232,24 @@ const ItemPage = () => {
                         <DescriptionTitle>Дополнительно</DescriptionTitle>
                     </DescriptionBox>
                     <DescriptionBox>
-                        <DescriptionInfo>{items.name}</DescriptionInfo>
+                        <DescriptionInfo>{item?.name}</DescriptionInfo>
                         <DescriptionInfo>хуета</DescriptionInfo>
                         <DescriptionInfo>хуетахуетахуетахуетахуетахуетахуетахуета</DescriptionInfo>
                         <DescriptionInfo>хуета</DescriptionInfo>
                     </DescriptionBox>
                 </Box>
                 <CounterBox>
-                    <Counter />
-                    <Link to={"/cart"}><ButtonOrder><ButtonText>В корзину</ButtonText></ButtonOrder></Link>
+                    <Counter value={quantity} id={item?.id}/>
+                        {quantity > 0
+                            ?  <Link to={"/cart"}>
+                                 <ButtonOrder>
+                                     В корзину
+                                 </ButtonOrder>
+                               </Link>
+                            : <ButtonOrder disabled>
+                               В корзину
+                              </ButtonOrder>}
+
                 </CounterBox>
             </InfoBox>
         </Container>

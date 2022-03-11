@@ -7,9 +7,10 @@ import OrdersPage from "./components/OrdersPage";
 import ItemPage from "./components/ItemPage";
 import MainPage from "./components/main/MainPage";
 import Cart from "./components/Cart";
+import ItemsCatalog from "./components/ItemsCatalog";
 
 
-function App() {
+export const App = () => {
 
 
 
@@ -25,8 +26,8 @@ function App() {
                     </Route>
                     <Route path="cart" element={<Cart/>}/>
                     <Route path="orders" element={<OrdersPage/>}/>
+                    <Route path="catalog" element={<ItemsCatalog/>}/>
                     <Route path="*" element={<NotFound/>}/>
-
                 </Route>
 
             </Routes>

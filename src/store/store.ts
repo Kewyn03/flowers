@@ -1,10 +1,8 @@
-import {combineReducers,configureStore} from "@reduxjs/toolkit";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import flowersReducer from './reducers/flowersSlice'
-import counterReducer from "./reducers/counterSlice";
 
 const rootReducer = combineReducers( {
     flowersReducer,
-    counterReducer
 
 })
 

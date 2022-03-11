@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {css} from "styled-components";
 import {ReactComponent as LikeRC} from "../../assets/images/like.svg";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
 const TitleStyle = css`
@@ -187,6 +187,8 @@ const OldPrice = styled.span`
 
 const OneCard = ({item}: any) => {
 
+    let navigate = useNavigate()
+
     return (
         <CardComponent>
             <Link to={`flowers/` + item.id}>
@@ -221,7 +223,7 @@ const OneCard = ({item}: any) => {
                             </Price>
                         }
                     </TitleContainer>
-                    <Link to="/orders"><ButtonOrder><ButtonText>Заказать</ButtonText></ButtonOrder></Link>
+                    <ButtonOrder onClick={() => navigate("/orders")}><ButtonText>Заказать</ButtonText></ButtonOrder>
                     <ButtonFastOrder>Быстрый заказ</ButtonFastOrder>
 
                 </BottomContainer>
