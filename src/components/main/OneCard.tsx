@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {css} from "styled-components";
 import {ReactComponent as LikeRC} from "../../assets/images/like.svg";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 const TitleStyle = css`
@@ -31,9 +31,7 @@ const CardComponent = styled.div`
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   transition: .5s;
 
-  &:nth-child(4n) {
-    margin-right: 0;
-  }
+ 
 
   &:hover {
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.5);
@@ -60,8 +58,8 @@ const Circle = styled.div`
 
 const CircleText = styled.span`
   position: absolute;
-  left: 8px;
-  top: 17px;
+  left: 10px;
+  top: 16px;
 `
 
 const TopContainer = styled.div`
@@ -191,8 +189,8 @@ const OneCard = ({item}: any) => {
 
     return (
         <CardComponent>
-            <Link to={`flowers/` + item.id}>
-                <TopContainer>
+
+                <TopContainer onClick={() => navigate(`/catalog/flowers/${item.id}`)}>
                     {item.discount > 0 ? (
                         <Circle>
                             <CircleText>-{item.discount}%</CircleText>
@@ -223,11 +221,11 @@ const OneCard = ({item}: any) => {
                             </Price>
                         }
                     </TitleContainer>
-                    <ButtonOrder onClick={() => navigate("/orders")}><ButtonText>Заказать</ButtonText></ButtonOrder>
+                    <ButtonOrder><ButtonText>Заказать</ButtonText></ButtonOrder>
                     <ButtonFastOrder>Быстрый заказ</ButtonFastOrder>
 
                 </BottomContainer>
-            </Link>
+
         </CardComponent>
 
     );

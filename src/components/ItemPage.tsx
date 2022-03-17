@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import styled, {css} from "styled-components";
-import {useAppSelector} from "../hooks/hooks";
-import {Link, useParams} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../hooks/hooks";
+import {useNavigate, useParams} from "react-router-dom";
 import {ReactComponent as LikeRC} from "../assets/images/like.svg";
 import Counter from "./Counter";
-import {selectItem, selectQuantityFromCart} from "../store/reducers/flowersSlice";
+import {add, selectItem, selectQuantityFromCart} from "../store/reducers/flowersSlice";
 
 
 const TitleStyle = css`
@@ -157,13 +157,13 @@ const ButtonOrder = styled.button`
   box-shadow: inset 0 5px 5px rgba(0, 0, 0, 0.15);
   border-radius: 7px;
   background-color: #956D84;
-  left: 30px;
+
   top: -15px;
   transition: .5s;
   margin-top: 30px;
   color: #FFFFFF;
   ${TitleStyle};
-  
+
   &:hover {
     opacity: 0.9;
     cursor: pointer;
@@ -184,22 +184,20 @@ const CounterBox = styled.div`
 const ItemPage: React.FC = () => {
 
     useEffect(() => window.scrollTo(0, 0), [])
-
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const {id} = useParams()
-
     const item = useAppSelector(state => selectItem(state, id))
     const quantity = useAppSelector(state => selectQuantityFromCart(state, id))
 
-    // const addItem = () => {
-    //     dispatch(add(item))
-    // }
-    console.log(quantity)
-
-    let discount
-    if (item){
-        discount = item.price - item.price * item.discount / 100
+    const addItem = () => {
+        dispatch(add(item))
     }
 
+    let discount
+    if (item) {
+        discount = item.price - item.price * item.discount / 100
+    }
 
     return (
         <Container>
@@ -221,7 +219,8 @@ const ItemPage: React.FC = () => {
                 }
                 {
                     item?.discount
-                        ? <PriceGroup><Price>{discount} грн.</Price><DiscountPrice>{item.price} грн.</DiscountPrice></PriceGroup>
+                        ?
+                        <PriceGroup><Price>{discount} грн.</Price><DiscountPrice>{item.price} грн.</DiscountPrice></PriceGroup>
                         : <Price>{item?.price} грн.</Price>
                 }
                 <Box>
@@ -239,16 +238,25 @@ const ItemPage: React.FC = () => {
                     </DescriptionBox>
                 </Box>
                 <CounterBox>
-                    <Counter value={quantity} id={item?.id}/>
-                        {quantity > 0
-                            ?  <Link to={"/cart"}>
-                                 <ButtonOrder>
-                                     В корзину
-                                 </ButtonOrder>
-                               </Link>
-                            : <ButtonOrder disabled>
-                               В корзину
-                              </ButtonOrder>}
+                    {quantity > 0
+                        ? <>
+                            <Counter value={quantity} id={item?.id}/>
+
+                                <ButtonOrder onClick={() => navigate('/cart')}>
+                                    Перейти в корзину
+                                </ButtonOrder>
+
+                        </>
+                        : <ButtonOrder onClick={addItem}>
+                            Добавить
+                        </ButtonOrder>
+
+                    }
+
+
+                    {/*: <ButtonOrder disabled>*/}
+                    {/*   В корзину*/}
+                    {/*  </ButtonOrder>*/}
 
                 </CounterBox>
             </InfoBox>

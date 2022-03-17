@@ -3,12 +3,14 @@ import {IFlower, IRoses} from "../../models/IFlower";
 import {ICartItem} from "../../models/ICartItems";
 import {RootState} from "../store";
 import {IOrder} from "../../models/IOrder";
+import {ISearch} from "../../models/ISearch";
 
 
 interface FlowersState {
     flowers: IRoses[]
     cartItems: ICartItem[]
     orders: IOrder[]
+    searchedItems: ISearch[]
     loading: boolean
     error: any
 }
@@ -17,6 +19,7 @@ const initialState: FlowersState = {
     flowers: [],
     cartItems: [],
     orders: [],
+    searchedItems: [],
     loading: false,
     error: null
 }
@@ -48,11 +51,11 @@ const flowersSlice = createSlice({
         add: (state: FlowersState, {payload}) => {
             const cartItem = state.cartItems?.find(item => item.cartItem.id === payload.id)
             if (cartItem) {
-                    cartItem.quantity += 1
+                cartItem.quantity += 1
             } else {
                 state.cartItems.push({
-                    cartItem:payload,
-                    quantity:1
+                    cartItem: payload,
+                    quantity: 1
                 })
             }
         },
@@ -63,13 +66,13 @@ const flowersSlice = createSlice({
 
             const cartItem = state.cartItems?.find(item => item.cartItem.id === payload.id)
             if (cartItem) {
-                     cartItem.quantity += 1
+                cartItem.quantity += 1
             } else {
-               const rose = state.flowers?.find(item => item.id === payload.id)
-                if (rose){
+                const rose = state.flowers?.find(item => item.id === payload.id)
+                if (rose) {
                     state.cartItems?.push({
-                        cartItem:rose,
-                        quantity:1
+                        cartItem: rose,
+                        quantity: 1
                     })
                 }
             }
@@ -81,11 +84,10 @@ const flowersSlice = createSlice({
                 cartItem.quantity -= 1
             }
         },
-        addOrders: (state:FlowersState,{payload}) => {
-            console.log(payload,'payload')
+        addOrders: (state: FlowersState, {payload}) => {
             state.orders.push({
-                order:payload,
-                price:payload.price
+                order: payload,
+                price: payload.price
             })
             state.cartItems?.splice(0)
         }
@@ -108,8 +110,7 @@ const flowersSlice = createSlice({
             (state, {payload}) => {
                 // We add all the new todos into the state
                 // and change `status` back to `idle`:
-                const roses = payload.roses.flat(1)
-                state.flowers.push(...roses)
+                state.flowers = payload.roses.flat(1)
                 state.loading = false
             });
 
@@ -128,15 +129,15 @@ const flowersSlice = createSlice({
 export const {add, remove, increment, decrement, addOrders} = flowersSlice.actions
 export default flowersSlice.reducer
 
-export const selectItem = (state: RootState, id: number | string | undefined )  => {
-   return state.flowersReducer.flowers.find(el => el.id === Number(id))
+export const selectItem = (state: RootState, id: number | string | undefined) => {
+    return state.flowersReducer.flowers.find(el => el.id === Number(id))
 }
 
 export const selectCartItems = (state: RootState) => {
     return state.flowersReducer.cartItems
 }
 
-export const selectQuantityFromCart = (state: RootState, id: number | string | undefined ) => {
+export const selectQuantityFromCart = (state: RootState, id: number | string | undefined) => {
     const item = state.flowersReducer.cartItems.find(el => el.cartItem.id === Number(id))
     return item?.quantity || 0
 }

@@ -17,12 +17,10 @@ const Container = styled.div`
   display: flex;
   max-width: 1420px;
   margin: 0 250px;
-  
 `
 
 const ContainerImg = styled.div`
   display: flex;
-  
   flex-wrap: wrap;
 `
 
@@ -34,7 +32,6 @@ const BigBox = styled.div`
   background-image: url(${Bigimg});
   background-color: #000000;
   background-repeat: no-repeat;
-
 `
 
 const TextImg = styled.span`

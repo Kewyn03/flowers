@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
-import {useAppSelector} from "../hooks/hooks";
-import ArrowRC from '../assets/images/accordion.png'
+import Accordion from "./Accordion";
+import OneCard from "./main/OneCard";
+import {IRoses} from "../models/IFlower";
 
 const Wrapper = styled.div`
   margin: 20px 250px 0;
+  
+`
+
+const Wrap = styled.div`
+  display: flex;
 `
 const Headline = styled.div`
   display: flex;
@@ -17,88 +23,34 @@ const Headline = styled.div`
   margin-top: 100px;
 
 `
-
-const Accordion = styled.div `
-  width: 250px;
-  border: 1px solid red;
-`
-
 const Container = styled.div`
-  position: relative;
-  margin-bottom: 10px;
-  
+  display: flex;
+  flex-wrap: wrap;
+  width: 1080px;
+  margin-left: 80px;
+  margin-top: 30px;
 `
 
-const Label = styled.div`
-  position: relative;
-  font-size: 20px;
-  font-family: 'Museo Sans Cyrl',sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 18px;
-  color: #333333;
-  ::after{
-    position: absolute;
-    right: 0;
-    content: url(${ArrowRC});
-    padding-right: 10px;
-  }
-`
+interface ItemsCatalogProps {
+    flowers: IRoses[]
+}
 
-const Content = styled.div`
-  font-family: 'Museo Sans Cyrl',sans-serif;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 38px;
-  color: #956D84;
-  padding-left: 35px;
-  
-`
-
-const ItemsCatalog = () => {
-
-    let {flowers} = useAppSelector(state => state.flowersReducer)
+const ItemsCatalog:React.FC <ItemsCatalogProps> = ({flowers}) => {
 
     return (
         <Wrapper>
-            <Headline>Каталог товаров</Headline>
-            <Accordion>
-                <Container>
-                    <Label>Букеты</Label>
-                    <Content>Букеты из роз</Content>
-                    <Content>Букеты из хризантем</Content>
-                    <Content>Букеты из альтромерии</Content>
-                    <Content>Букеты из гербер</Content>
-                    <Content>Букеты из ирисов</Content>
-                    <Content>Букеты из пионов</Content>
-                </Container>
-                <Container>
-                    <Label>Розы</Label>
-                    <Content>Букеты из роз</Content>
-                </Container>
-                <Container>
-                    <Label>Цветы в коробке</Label>
-                    <Content>Какие-то цветы в коробке</Content>
-                </Container>
-                <Container>
-                    <Label>Композиции</Label>
-                    <Content>Какие-то композиции</Content>
-                </Container>
-                <Container>
-                    <Label>Подарки</Label>
-                    <Content>Какие-то подарки</Content>
-                </Container>
-                <Container>
-                    <Label>Подарочные корзины</Label>
-                    <Content>Какие-то подарочные корзины</Content>
-                </Container>
-            </Accordion>
-            {flowers.map(item =>
-                <>
 
-                </>
-            )}
+            <Headline>Каталог товаров</Headline>
+
+            <Wrap>
+                <Accordion/>
+                <Container>
+                    {flowers.map(item =>
+                        <OneCard key={item.id} item={item}/>
+                    )}
+                </Container>
+            </Wrap>
+
         </Wrapper>
     );
 };

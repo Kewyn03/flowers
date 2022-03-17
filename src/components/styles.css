@@ -1,3 +1,4 @@
+
 .mySwiper {
     display: grid;
     width: 1720px;
@@ -58,4 +59,121 @@
     display: flex;
     flex-wrap: wrap;
     margin-right: 30px;
+}
+
+.line {
+    background-color: #ffffff;
+    border: none!important;
+    border-top: none!important;
+    padding-top: 5px!important;
+    
+}
+
+.line:first-child {
+    padding-top: 0!important;
+}
+.line > div {
+    border: none!important;
+    padding: 0!important;
+    margin-top: 5px!important;
+}
+
+.line > div > div {
+    padding: 0!important;
+}
+
+.line > div > div > span {
+    position: absolute;
+
+    right: 0;
+    top: 12px;
+}
+
+
+
+
+.menu {
+    border: none!important;
+    font-size: 20px!important;
+}
+
+.content {
+    border: none!important;
+}
+
+.paginate {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.paginate>li {
+    transition: .5s;
+    display: flex;
+    margin: 10px;
+    width: 55px;
+    height: 55px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.selected {
+    background: #956D84!important;
+}
+.selected:hover {
+
+    opacity: 0.8!important;
+}
+.selected > a {
+    color: #ffffff!important;
+}
+.selected > a:hover {
+    color: #ffffff!important;
+}
+
+.paginate>li>a{
+    width: 20px;
+    color: #333333;
+    transform: scale(1.7);
+}
+.paginate>li:hover {
+    background: #D6C5CF;
+    color: #ffffff;
+}
+
+.paginate>li:hover>a {
+    color: #ffffff;
+}
+
+.paginate>li:first-child>a {
+    opacity: 0;
+    width: 20px;
+    height: 30px;
+}
+
+.paginate>li:last-child>a {
+    opacity: 0;
+    width: 20px;
+    height: 30px;
+}
+
+.paginate>li:first-child {
+    background-color: #ffffff;
+    background-image: url(../assets/images/arrowSlider.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.paginate>li:last-child {
+    background-color: #ffffff;
+    background-image: url(../assets/images/arrowSlider.svg);
+    transform: scale(-1,1);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.disabled {
+    opacity: 0.5;
 }

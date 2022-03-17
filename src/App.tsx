@@ -7,11 +7,10 @@ import OrdersPage from "./components/OrdersPage";
 import ItemPage from "./components/ItemPage";
 import MainPage from "./components/main/MainPage";
 import Cart from "./components/Cart";
-import ItemsCatalog from "./components/ItemsCatalog";
+import PaginatedCatalog from "./components/main/PaginatedCatalog";
 
 
 export const App = () => {
-
 
 
     return (
@@ -21,12 +20,13 @@ export const App = () => {
 
                 <Route path="/" element={<FirstPage/>}>
                     <Route index element={<MainPage/>}/>
-                    <Route path="flowers">
-                        <Route path=":id" element={<ItemPage/>}/>
-                    </Route>
+
                     <Route path="cart" element={<Cart/>}/>
                     <Route path="orders" element={<OrdersPage/>}/>
-                    <Route path="catalog" element={<ItemsCatalog/>}/>
+                    <Route path="catalog" >
+                        <Route index element={<PaginatedCatalog/>}/>
+                        <Route path="flowers/:id" element={<ItemPage/>}/>
+                    </Route>
                     <Route path="*" element={<NotFound/>}/>
                 </Route>
 

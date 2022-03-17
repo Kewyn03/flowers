@@ -11,6 +11,7 @@ const CounterBox = styled.div`
   border: 1px solid #956D84;
   width: 105px;
   height: 63px;
+  margin-right: 30px;
 `
 
 const ArrowButton = styled.button`
